@@ -1,0 +1,1375 @@
+I want a VERTICAL (9:16) 30-second product promo Reel for the Gojek app in the "Device Morph Showcase" style: a 3D phone-UI motion style that I supply as a reference video (see PROJECT FILES). Build it with the "Glassmorphism UI" (Dimensional) style kit below. That kit gives you the H helper library, the sound kit and the reference source code for frosted glass: glass(), blurOf(), orb(), chipPill(), glowLine(), the frost-noise pattern and the glass sound recipes. Use them as your rendering toolkit, and rebuild everything around my content and the Device Morph style described in this prompt. The kit's reference is landscape 1280x720 on a dark violet dashboard; mine is portrait 1080x1920 on a pale studio stage with one phone (see FORMAT and DEVICE RIG).
+
+PROJECT FILES
+- ./reference/device-morph-reference.mov is the style reference.
+  - It is an iPhone screen recording of a ≈15.2 s looping agency reel: 690x1518, variable frame rate.
+  - Reel time = file time − 0.2 s (the first 0.2 s is a frozen frame). It restarts at ≈15.35 s file time.
+  - Ignore the two thin horizontal white lines near the top; they belong to the recorder, not the design.
+  - Before the storyboard, extract frames with ffmpeg (10 fps overall, 30 fps around each transition) and study the camera, the morphs and the timing. Every time quoted in TECHNIQUES below was measured from this file.
+- ./reference/keyframes.png: one labelled frame per reference beat.
+- ./assets/gojek-logo-white.png and ./assets/gojek-logo-color.png: the official Gojek logo lock-up (Solv mark + "gojek" wordmark), transparent background.
+  - If I also supply ./assets/gojek-solv-white.png (mark only) and ./assets/gojek-wordmark-white.png (wordmark only), use them for the two-part logo build in B19.
+  - Otherwise animate the single lock-up with a left-to-right mask reveal.
+- ./assets/gojek-app-icon.png (optional): the app icon for the lock-screen notification. Without it, use a plain #00AA13 rounded square. Never draw a substitute mark.
+- ./assets/screens/*.png (optional): my screenshots of the current Gojek app. Use them only as layout and colour reference. Rebuild the UI as vector drawing so every element can move and morph. Never paste a screenshot onto the phone screen.
+- ./assets/photos/dish.jpg (optional): a dish photo I have rights to. Without it, draw a stylized plate of nasi goreng (rice mound, fried egg, cucumber, sambal) with soft studio lighting.
+- Write everything you make into this folder: storyboard.html, gojek-reel.html, the render script and gojek-reel-1080x1920.mp4.
+
+MY CONTENT
+A 30-second promo for the Gojek super app (Indonesia) for Instagram / TikTok Reels: "Satu Hari, Satu Aplikasi" (One day, one app).
+
+One person's whole day is solved inside Gojek, told only through the phone's UI with no narration and no headline copy outside the screen:
+- Pagi (morning) – commute: GoRide → KRL → GoRide
+- Siang (midday) – eat: GoFood
+- Sore (afternoon) – send: GoSend
+- Malam (evening) – shop and save: GoMart, then Gojek PLUS
+- Then the day folds back into the home grid and lands on the Gojek logo with #PastiAdaJalan.
+
+The status-bar clock tells the time of day (07.00 → 07.48 → 12.15 → 16.30 → 19.45 → 21.00). Each chapter jump happens with a clock-digit roll.
+
+On-screen UI copy is in Bahasa Indonesia, exactly as written in STORYLINE.
+- Use ONLY the facts in the FACT SHEET. Never invent numbers, ranks, superlatives or features, and never drop a qualifier attached to a fact.
+- Copy marked [P] is placeholder UI content with no claim attached. Use it exactly as written, and invent nothing else beyond the generic dish and grocery visuals.
+
+FACT SHEET (sources: Gojek App Store listing, Indonesia, Oct 2026; gojek.com/id-id; gojek.com/id-id/gotransit; The Jakarta Post, 28 Apr 2026; Asphalt design system, asphalt.gojek.io)
+- Gojek is the app of PT GoTo Gojek Tokopedia Tbk. App Store subtitle: "Ojek, Makan, Kirim & Belanja".
+- GoRide: "GoRide Hemat" and "GoRide Comfort", with "PerjalananAman+" insurance on every trip.
+- GoCar: "GoCar" (regular), "GoCar XL" for groups "hingga 6 orang", and "GoCar Premium".
+- GoTransit: "Naik GoRide dan beli tiket KRL, dalam satu transaksi!"
+  - The KRL ticket includes "GoRide dari/ke stasiun".
+  - Real-time KRL schedule ("jadwal kereta real-time").
+  - Available only in Jabodetabek and Yogyakarta–Solo, KRL / Commuter Line only. Never imply national coverage.
+- GoFood: "Ribuan pilihan menu dari restoran dan kafe favoritmu".
+- GoSend:
+  - same-day delivery with "jaminan ketepatan waktu dan asuransi barang".
+  - "Kode Terima Paket" (Delivery Code, launched Apr 2026): an optional, free 4-digit code shown to sender and recipient. The recipient gives it to the driver, who enters it to complete the delivery.
+- GoMart: groceries and household needs, "dijamin sampai ke pintumu dalam 30 menit".
+- Gojek PLUS: subscription, "diskon hingga Rp12.000 per transaksi untuk semua layanan Gojek". Keep "hingga". Never show a total of savings.
+- Payment: "Bayar dengan GoPay, kartu, atau tunai".
+- In-app: "Telepon gratis layar penuh dengan driver", real-time tracking, driver ratings.
+- Home-grid services listed on gojek.com: GoRide, GoCar, GoFood, GoSend, GoMart, GoTransit, GoShop, GoBox.
+- Brand:
+  - primary green #00AA13
+  - logo = Solv logogram + "gojek" logotype
+  - UI typeface Maison Neue (licensed; use Inter 400/600/800 instead, no italics)
+  - campaign line "#PastiAdaJalan"
+- Do NOT show:
+  - driver or user counts (the official sources conflict)
+  - "#1" or "terbesar" claims
+  - ride fares or prices of any kind
+  - real restaurant names, real addresses or named stations
+- Number and time style: Rp12.000 · 07.00 · 4 7 2 9.
+
+STORYLINE (draft beats; refine them in the storyboard and keep the facts). DURATION = 30.
+- One continuous film around one phone. There are no hard cuts. The only "scene changes" are this style's own: diving into the screen, passing through the glass, pull-out reveals, the lens bloom and the app closing.
+- Use one shared timing table T for picture and sound. Technique codes (T1–T16) refer to TECHNIQUES.
+- Poses (HERO, NEAR, FULL, END) are defined in DEVICE RIG.
+
+B1 HOOK 0.00–1.40
+Picture: whip-in (T16) 0.00–0.70. The phone enters from the lower left, close and blurred: scale 1.0 → HERO, roll −20° → −11°, motion blur until 0.35. The lock screen shows the green sphere wallpaper. The glass clock "07.00" and the date "Senin, 2 November" [P] drop in from above the screen's top edge (T4) 0.45–0.70. The Gojek app icon pops (back ease, 0.2 s) at 0.85, and a frosted banner grows out of it to the right (T3) 0.95–1.30: "Gojek" / "Pagi! Mau ke mana hari ini?" [P] / "sekarang".
+Sound: pad bed; whoosh on the whip-in; glass tap when the clock lands (0.70); pop on the icon (0.85); chime on the banner (1.25).
+
+B2 OPEN 1.40–2.60 (continuous)
+Picture: the banner expands into the whole screen 1.40–1.75 (corner radius → screen radius, ease inOut) and becomes the Gojek home:
+- light UI, green header #00AA13
+- search pill "Cari layanan, makanan & tujuan" [P]
+- a GoPay strip with "GoPay" and a masked balance "Rp •••••"
+- 8 service tiles that unpack from below the screen's bottom edge (T1) 1.75–2.15, staggered 50 ms, compact cluster → 4×2 grid, each with its label: GoRide, GoCar, GoFood, GoSend, GoMart, GoTransit, GoShop, GoBox.
+Camera: slow push, roll −11° → −4°, yaw 12° → 6°.
+Sound: pulse music starts (1.40); a soft glide under the expand; a glass tap per tile.
+
+B3 BURST 2.60–3.60 (continuous)
+Picture: the tiles lift off the glass toward the camera (T2) 2.60–3.30, right column first, staggered 60 ms, with parallax and motion blur, and fly out past the frame edges. The GoRide tile stays and grows into the booking sheet (T3) 3.10–3.60:
+- pickup row "Lokasi jemput" [P] with a green dot
+- destination row "Kantor" [P] with a pin
+Camera: accelerating dive to FULL, roll → 0, yaw → 0; lands at 3.30 with a short snappy ease-out.
+Sound: an airy swish pair (2.62, 2.80); low glide 2.60–3.30; tap on landing (3.35).
+
+B4 SERVICE ROLL 3.60–5.00 (continuous)
+Picture: the option card barrel-rolls (T5) one step every 0.22 s (3.62 / 3.84 / 4.06 / 4.28 / 4.50) through:
+1. "GoRide Hemat"
+2. "GoRide Comfort" + badge "PerjalananAman+"
+3. "GoCar"
+4. "GoCar XL" + "hingga 6 orang"
+5. "GoCar Premium"
+It settles at 4.72 on "GoTransit" + "GoRide + KRL, satu transaksi", with a 3% pop. While the screen fills the frame, the background swaps to the blurred map plate (3.70). A pull-back to NEAR (4.40–5.00) reveals the bezel over the new background.
+Sound: a light roll tick per step, rising in pitch; a tock on the settle (4.72); soft glide on the pull-back.
+
+B5 DRIVER FOUND 5.00–6.30 (continuous)
+Picture: the "Pesan" pill presses (scale 0.94 → 1) at 5.00. A frosted driver card slides up 5.15–5.55:
+- silhouette avatar (no faces)
+- "★ 4,9" [P]
+- plate "B •••• •••"
+- "Driver menuju lokasimu" [P]
+- a round call button that starts to pulse at 5.90
+Camera: float, small push NEAR → s 0.82.
+Sound: pop (5.00); taps as the card rows land (5.35, 5.55).
+
+B6 FREE CALL 6.30–7.70 (continuous)
+Picture: the call button expands into a full-screen call 6.30–6.70 (circle → rounded rect → whole screen):
+- "Telepon gratis"
+- "Driver GoRide" [P]
+- a timer "00:01" → "00:04" [P]
+- a pulsing voice waveform
+The hang-up button presses at 7.20. The call collapses 7.20–7.60 into a circle that becomes a green driver pin on a map.
+Camera: push to s 0.90 on the expand, settle to s 0.86.
+Sound: two soft ring blips (6.40, 6.70); one tick per timer second; a downward swish on the collapse.
+
+B7 DIVE 7.70–9.00 (continuous)
+Picture: the driver pin glows (7.70). The phone rolls ≈30° clockwise while the camera pushes hard toward the pin (7.80–8.50); the pin stays centred and level. The camera passes through the glass (T11) 8.45–8.75 with a soft white bloom, entering the map world. The green route draws on out of the pin (T12) 8.70–9.00.
+Sound: riser 7.75–8.45; low glide 7.80–8.60; an airy pass-through whoosh (8.50).
+
+B8 RIDE → RAIL 9.00–11.00 (map world)
+Picture: follow-cam (T14-map) on the bike pin along the green route 9.00–10.10. The map layers slide in with directional blur (T13) 9.00–9.30. The camera's heading roll follows the route (≈25°). At the station marker "Stasiun" (10.10) the line hands over to a dashed dark-grey KRL line with a train glyph (10.10–10.40). Chip: "KRL · jadwal real-time" (10.45).
+Sound: a tick per map layer (9.05–9.25); tap at the station (10.10); pop on the chip (10.45).
+
+B9 LAST MILE 11.00–12.40 (map world)
+Picture: the train glides to the next "Stasiun" 11.00–11.70. A new bike pin picks up the route (11.75) and rides a short green stretch to the office pin 11.75–12.30. Chip: "GoRide dari/ke stasiun" (11.85).
+Sound: FILTERED BREAKDOWN from 11.00 (pad only, a held low sub, highs cut); a soft pop on the chip.
+
+B10 ARRIVED 12.40–13.80 (continuous)
+Picture: fast pull-out 12.40–12.85. The map was the phone's screen; the bezel re-enters from beyond the frame edges and the phone lands at NEAR, roll 0, status bar "07.48". The trip card shows "Sampai tujuan" [P]. Five stars pop one by one 12.95–13.35 (80 ms apart), then a green check circle (13.40). The status-bar clock rolls 07.48 → 12.15 (13.40–13.70).
+Sound: glide on the pull-out; five rising ticks; a riser 13.20–13.80 into the drop.
+
+B11 GOFOOD — THE KEY MOMENT 13.80–15.30 (continuous)
+Picture: the check circle blooms into a liquid-glass lens (T6) 13.80–14.30, with the dish photo inside. The camera pushes to FULL with the bloom, so the background swaps (to the blurred warm food plate) at 14.20 while the screen fills the frame. Pull back to NEAR 14.30–14.60. GoFood screen:
+- header "Ribuan pilihan menu"
+- a fast menu scroll burst with motion blur 14.60–15.00, settling on the card "Nasi Goreng" [P]
+- other cards: "Sate Ayam", "Mie Ayam", "Es Teh" [P]
+- "Tambah" pops (15.10)
+Sound: THE DROP at 13.80: the full mix returns with a deep soft bwoom, a bright chord and a glass sparkle on the bloom. Then a scroll swish; tap on "Tambah".
+
+B12 PAYMENT ROLL 15.30–16.60 (continuous)
+Picture: the checkout sheet slides up (15.30–15.55). Its payment row barrel-rolls (T5) "GoPay" → "Kartu" → "Tunai" → "GoPay" (steps 15.65 / 15.85 / 16.05, settle 16.25). The "Pesan" pill pops (16.40).
+Sound: three roll ticks; tock on the settle; pop.
+
+B13 ON ITS WAY 16.60–17.80 (continuous)
+Picture: a rack-defocus state switch (T7) 16.60–16.95 takes the screen to "Pesanan sedang diantar" [P], with a mini map and a moving bike dot (real-time tracking). The dish thumbnail match-morphs (T9) 17.20–17.70 into a food-bag glyph inside a frosted circle.
+Sound: a soft shutter-like click at the defocus peak (16.78); pop on the bag (17.70).
+
+B14 GOSEND 17.80–19.40 (continuous)
+Picture: the clock rolls 12.15 → 16.30 (17.80–18.05). The camera makes a small roll (−8°) and push to FULL (18.05–18.35), and the background swaps to a blurred cool-neutral plate at 18.20. Then:
+- icon swap (T10): the bag glyph spins out 17.85–18.10, and a Gojek-green swirl fills the ring 18.05–18.35, resolving into the GoSend parcel puck
+- pull back to NEAR 18.35–18.70; the GoSend card grows from the puck 18.40–18.70
+- "Kode Terima Paket" (18.70); its four digits roll in "4 7 2 9" [P] at 18.80 / 18.92 / 19.04 / 19.16
+- chips "Same-day" and "Asuransi barang" (19.25)
+Sound: a rising blip sweep with the swirl; tock as the card lands; four ticks; pops on the chips.
+
+B15 DELIVERED 19.40–20.80 (continuous)
+Picture: on the card's mini map the parcel puck travels a short route to the recipient pin 19.40–20.10 (the route draws on). The code digits light up one by one 20.15–20.45 and resolve into a green check: "Paket diterima" [P] (20.50).
+Camera: small push into the card, s 0.80 → 0.86.
+Sound: short glide; four soft blips; ding (20.50).
+
+B16 GOMART 20.80–22.40 (continuous)
+Picture: the camera pushes to FULL (20.85–21.10) and the background swaps to a blurred fresh-produce plate at 21.00. The clock rolls 16.30 → 19.45 (20.80–21.05). The check pops into the GoMart bag icon (21.00). Grocery items (leafy greens, a milk carton, bread, eggs, an apple) fly IN from beyond the frame edges, large and blurred, into the bag (reverse T2) 21.15–21.85, staggered. The bag lands with a squash (21.90). Chip: "Sampai dalam 30 menit" with a ring timer sweeping once around it (22.00–22.40).
+Camera: pull back to s 0.80 as the items converge.
+Sound: a reverse swish per item; a thud on the bag; a tick on the ring.
+
+B17 HEMAT 22.40–23.80 (continuous)
+Picture: the bag slides up into a receipt (22.40–22.70). Three more receipts fan out behind it, staggered 0.12 s (22.75–23.10), titled "GoTransit", "GoFood", "GoSend"; the front one is "GoMart". Each carries a small "Gojek PLUS" tag. The front line lands "Diskon hingga Rp12.000 per transaksi" (23.25, 3% pop). No totals anywhere.
+Camera: a gentle orbit across the fan (yaw −8° → +8°), then a push to FULL 23.60–23.95. The background swaps to the blurred green home plate at 23.85.
+Sound: four card flicks; a warm chord on the PLUS line.
+
+B18 WRAP 23.80–25.00 (continuous)
+Picture: the receipts collapse (23.80–24.05) and the clock rolls 19.45 → 21.00 (23.85–24.10). The 8 service tiles fly back in from beyond the camera and lock into the home grid (reverse T2 + T1) 24.10–24.70, with GoRide locking last.
+Camera: pull-out to END (24.20–25.00).
+Sound: reverse swishes; a tap per tile lock; the music stops at 25.00.
+
+B19 LOCK-UP 25.00–27.00 (continuous)
+Picture:
+- 25.00–25.45: the app closes (T14) — the home content shrinks upward like a swipe-close — while Gojek green #00AA13 rises from the bottom to fill the screen.
+- 25.35–25.55: the white Solv mark rises from the screen bottom to the centre.
+- 25.65–26.05: the mark slides left while the white "gojek" wordmark un-masks from behind it, left to right (T15).
+- 26.15–26.40: "#PastiAdaJalan" (Inter 600, white) fades and rises 12 px into place below.
+Sound: glide; tock on the mark; click on the wordmark; a resolving chord + a soft bwoom on the hashtag.
+
+B20 HOLD + LOOP 27.00–30.00
+Picture: hold the logo; the phone floats up slowly (≈2% of frame height per second) 27.00–29.40. Whip-out (T16) 29.40–29.95: ease-in acceleration up and to the right, off frame. The last frame is the empty stage, so the film loops into B1's whip-in from the lower left.
+Sound: pad tail; silence 29.00–29.40; whoosh out (29.45).
+
+TECHNIQUES (measured from the reference; reproduce their feel exactly)
+- T1 Grid unpack: tiles rise from below the screen's bottom edge as a tight cluster and expand into the grid. 0.35 s, ease-out, stagger 50 ms.
+- T2 Icon burst: tiles lift off the glass toward the camera (z-pop with parallax), scale up fast and fly past the lens with motion blur. ≈0.8 s, stagger 60 ms.
+  - Each tile is drawn in stage space once it leaves the screen, with perspective scale F/(F − z).
+  - Reverse T2 = the same in reverse, with objects converging from beyond the camera into a target.
+- T3 Grow-from-element: a new card or banner grows out of the element that is already there. The element stays put while the card expands from it and its text reveals left to right. 0.3–0.4 s.
+- T4 Drop-in: the glossy clock slides down from above the screen's top edge. 0.25 s, ease-out.
+- T5 Barrel roll: the card is a band wrapped on a horizontal cylinder whose axis is tilted 12°, and it rotates one face per step.
+  - Draw the outgoing and incoming faces as 48 horizontal strips. Each strip sits at y = R·sin φ, with height ∝ cos φ and brightness × (0.55 + 0.45·cos φ), so text bends and squashes as it rolls.
+  - The leading edge gets a bright white/mint refractive rim (2–3 px, glow 10).
+  - One step = 0.22 s (service and payment rolls) or 0.25 s (clock digits, staggered 40 ms right to left).
+- T6 Liquid-glass lens bloom: a circle grows from the source element's centre until it covers the screen (0.5 s, ease inOut). Inside it is the next state. It has a thick refractive rim (≈26 units):
+  - the next state magnified 1.12× about the centre, clipped to the rim annulus
+  - an inner white → mint gradient stroke and a soft dark outer shadow
+  - the rim arc stays visible as it sweeps past the screen corners
+- T7 Defocus switch: blur 0 → 14 px → 0 over 0.35 s with an 8% darkening; swap the state at the peak.
+- T8 (the reference's in-screen pan) is not used in this film.
+- T9 Match morph: a real object (the dish photo) shrinks into a circle, desaturates, and its silhouette collapses into a glyph inside a frosted circle. 0.5 s.
+- T10 Icon swap:
+  - The old glyph spins ≈45°, shrinks to 0.3 and flies up-right while fading.
+  - A Gojek-green conic arc sweeps 0 → 360° around the inside of the glass ring and fills to a disc.
+  - The new glyph pops in (0.6 → 1, ease-out). ≈0.6 s in total.
+- T11 Pass-through: the camera pushes until the bezel leaves the frame, then a soft white bloom (0 → 0.6 → 0 over 0.3 s), and the screen's world continues full-frame in stage space.
+- T12 Draw-on: routes and lines draw from their origin. 0.2–0.3 s per segment, ease-out.
+- T13 Slide-in with smear: map layers whip into place along one direction with directional motion blur. 0.3 s.
+- T14 Follow-cam / pull-out / app close:
+  - In the map world the camera tracks the moving pin, with roll following the route tangent (0.25 s lag) and a slight perspective tilt (map plane pitched ≈18°).
+  - Pull-out reveals the phone again in 0.4–0.5 s (ease-out).
+  - App close: the content scales down and slides up into a rounded card that leaves the top while the next colour rises from the bottom.
+- T15 Logo build: the mark rises, then slides left as the wordmark un-masks; the line below fades and rises in. ≈0.85 s total.
+- T16 Whip in/out: strong ease-out on entry (≈70% of the move happens in the first 0.3 s) and pure ease-in on exit, with motion blur on both. Exit up-right / entry from lower-left chain into one continuous loop.
+
+DEVICE RIG (2.5D in Canvas 2D; this is the medium, do not switch to WebGL)
+- Per-frame pipeline:
+  1. Draw the stage.
+  2. Render the current screen into an offscreen screen canvas SC (1080×2340 units) in screen space: wallpaper or app UI, glass panels (blurring SC's own background via blurOf), and every transition that happens inside the screen.
+  3. Composite SC onto the phone at the current POSE.
+  4. Draw in stage space anything that leaves the screen: flying tiles, groceries, the map world during and after the pass-through.
+  5. Finishing.
+- POSE = {cx, cy, s, roll, yaw, pitch}. (cx, cy) is the phone centre on the 1080×1920 frame, s maps SC units → frame px, and the angles are radians.
+  - Project a phone-plane point (u, v, 0) by rotating it about x (pitch), y (yaw) and z (roll), then x' = cx + s·X·F/(F − Z) and y' = cy + s·Y·F/(F − Z), with F = 3200.
+  - When |yaw| and |pitch| < 0.04, draw SC with a single affine drawImage (fast and crisp).
+  - Otherwise mesh-warp SC through a 6×12 grid: two clipped affine triangles per cell, with 0.5 px overlap to hide seams.
+- Poses (starting values; tune in the storyboard):
+  - HERO: s 0.46, cx 540, cy 1060, roll −11°, yaw 12°, pitch 4°
+  - NEAR: s 0.78, cx 540, cy 960, all angles 0. The whole phone is visible and the status bar is readable.
+  - FULL: s 1.00, cx 540, cy 960. The screen fills the frame width.
+  - END: s 0.62, cx 540, cy 1000, roll +6°, yaw −10°
+  - Pass-through goes up to s 1.6.
+  - Interpolate keyed poses with per-segment easing: ease-out for arrivals, inOut for morphs, ease-in for exits, and "dive" = a long ease-in followed by a snappy ease-out ≈ cubic-bezier(0.7, 0, 0.2, 1).
+- Body:
+  - Front outline: a rounded rect = SC + a 34-unit bezel; outer radius 168, screen radius 140; satin graphite #150A15 with a soft edge highlight.
+  - Side wall: the band between the front outline and the same outline offset −40 units in z, drawn only where it faces the camera, with 2 buttons on the left and 1 on the right.
+  - A generic pill cutout (300×88, black) at the top centre of SC.
+  - No logos anywhere on the device.
+- Stage:
+  - pale warm-grey cyclorama: top #DAD7DA, mid #DFDCDF, a bright horizon band #F3F2F4 at ≈78% height, floor gradient down to #ABABAC
+  - a soft, wide, low-contrast hover shadow behind and below the phone (rounded rect, ≈1.15× the phone size, blur 90 px, opacity ≈0.2), with no contact shadow
+- Background echo (depth of field): behind the phone, draw the current BG plate. This is a blurred, enlarged copy of a screen state (blurOf at ¼ resolution, ≈40 px blur, 60–70% over the cyclorama), with the cyclorama's floor gradient on top.
+  - Plates in order: the lock/home echo (0–3.70), map (3.70), food (14.20), cool neutral (18.20), produce (21.00), green home (23.85).
+  - Plates change ONLY while the pose is FULL or beyond, so the swap is never visible.
+  - Keep the grey floor gradient as a faint overlay on the bottom 18% of the frame, even in the map world.
+- Motion blur: on fast moves only (whips, flying tiles and items, map slide-in, pass-through). Average 6–8 sub-samples of the moving layer across a 180° shutter (t ± 1/120 s), always derived from t.
+- Map world: off-white ground #F8F5F1, parks #8FC767, roads #BDBEBD with a #A8A8A8 outline, route #00AA13 with a #7CF29A rim, a dashed KRL line #3A3F45, labels in grey caps #7C7C7D. Station labels are only "Stasiun".
+- Pins and pucks: a coloured disc with a white glyph inside a frosted-glass ring (glass() + orb() highlights) with a soft drop shadow.
+- Glass inside SC:
+  - Call glass(sctx, SRC, …) where SRC = blurOf(SC background so far) built at ¼ resolution (glass() scales the source to the canvas, so a small source is fine).
+  - Re-blur for glass-over-glass exactly as the reference does.
+
+FORMAT (Instagram / TikTok Reel)
+- Logical canvas 1080×1920 portrait. Replace every hard-coded 1280/720 in the reference (fillRect, H.layer sizes, clip, blur layers, grid, blob spread) with W/H_. Don't use H.render (its H.W/H.H are 1280×720); set your own transform.
+- Safe area: when a UI line is meant to be read, it must sit inside x 64–960 and y 250–1500 of the frame (the Reels UI covers the top ~250 px, the bottom ~420 px and the right ~120 px). The phone body, stage and flying objects may run under the UI.
+- Legibility: UI type on SC is title 56–64, body 40–44, caption 34 units (Inter 800/600/400). Read-critical lines appear only at NEAR or FULL, so they reach ≥ 34 px on the frame (≥ 40 px for primary lines). The status-bar clock is ≥ 40 units on SC.
+
+PALETTE (Gojek; replaces the kit's violet / pink / orange)
+- GJ_GREEN #00AA13 (official). Derived tints (ours, not official):
+  - GJ_DEEP #024B12
+  - GJ_BASE #03160A
+  - GJ_MINT #7CF29A
+  - GJ_PALE #DFF8E5
+- Warm accent AMBER #FF9F2E: used sparingly, for the food glow, the GoFood/GoMart glyph secondaries and the produce plate. INK #FFFFFF on dark, #1C1C1E on light; GREY #8E8E93.
+- Lock-screen wallpaper: the kit's blob + orb recipe recoloured — GJ_BASE base with large sphere arcs and blobs in GJ_DEEP, GJ_GREEN and GJ_MINT, plus one small AMBER glow.
+- Glass clock: gradient GJ_PALE → GJ_MINT → GJ_GREEN with an inner highlight and a 3D glass bevel.
+- Home UI: white #FFFFFF with a GJ_GREEN header. Tiles are white rounded squares (radius 36) with a soft shadow and a two-colour glyph: GJ_GREEN + one secondary — AMBER for GoFood and GoMart, GJ_MINT for GoSend, #3A3F45 for GoTransit.
+- Lens and rim highlights: white → GJ_MINT. Any red appears only inside food imagery.
+
+BRAND RULES
+- Use the supplied Gojek logo files exactly as given: no recolouring, cropping or distortion (keep the aspect ratio), with clear space of at least the Solv mark's radius around the lock-up. Never draw, trace or approximate the Gojek logo, Solv mark or official service icons in code.
+- Embed the logo images as base64 data URLs so the HTML stays self-contained, and await img.decode() before the first draw (also in storyboard.html). If a logo file is missing, fall back to the plain text "gojek" (Inter 800, 120 px on the frame, white) on the green screen — never a drawn mark.
+- Service tiles use generic glyphs (motorbike, car, bowl, parcel, basket, train, shopping bag, box truck). If I supply official icon files in ./assets/icons/, use those instead.
+- The phone is unbranded: no Apple or other device marks, and no real app icons other than Gojek's. No people: the driver avatar is a neutral silhouette and plates are masked.
+
+STORYBOARD FIRST: before building the animation, make a VISUAL storyboard and wait for my OK.
+- One HTML page (storyboard.html) with a grid of 9:16 panels, one per beat (B1–B20).
+  - Each panel is a 1080×1920 canvas showing that beat's key frame, drawn with the real code: the H library, glass(), blurOf(), orb(), chipPill(), glowLine(), plus the device rig, stage, UI, map and logo.
+  - Panels are displayed scaled down (about 216×384) in 5 columns. Still frames only, no animation or sound yet.
+- Under each panel:
+  - the beat number and its start and end time
+  - the exact on-screen UI copy
+  - the camera pose (from → to)
+  - how it gets there from the previous panel: which element carries over and which technique (T1–T16) transforms it
+  - its key sounds
+- Below the grid:
+  - list every fact used, with its FACT SHEET line
+  - list every [P] placeholder
+  - list anything you had to assume
+- Add one strip of 6 small frames from ./reference/device-morph-reference.mov next to the matching frames of your T5, T6, T10, T11, T14 and T16, so I can compare the motion language.
+
+When I approve it (or after my changes), build the full animation exactly as storyboarded, reusing the storyboard's drawing code.
+
+WHAT TO BUILD
+One self-contained HTML file (gojek-reel.html):
+- A 1080×1920 canvas, scaled to fit the window with letterboxing, and a small control bar: play/pause, a scrub slider, the current time, a sound on/off toggle, and loop on by default.
+- A new `explainer(ctx, W, H_, t)` that tells MY CONTENT in this style. DURATION = 30.
+- A `scoreSound(k)` function that schedules the sound effects with the SOUND kit below (see SOUND). Play it in sync from the player: on play call `stopSound = SOUND.live(scoreSound, currentT, { voiceover: false })`, and call `stopSound()` on pause, on seek and when the sound toggle is turned off.
+- Include the H helper library and the SOUND kit below unchanged, and keep the reference's own helper functions where they are useful (glass, blurOf, orb, chipPill, glowLine, noisePattern, and the sound recipes tap / chime / frost / glow / glide / counter).
+- Load these Google Fonts before the first draw (await document.fonts.load for each spec you use): Inter
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=block">
+- Expose `window.seek = (t) => { /* draw frame at time t */ }`, `window.DURATION` and `window.scoreSound`, so the animation can be rendered frame by frame to video later.
+
+HOW TO STAY IN THE STYLE
+- The look and motion come from the reference video: one phone, a camera that never stops, morphs that hand one element to the next feature, a background that is a blurred echo of the screen, and a fast tempo.
+- The rendering comes from the kit: real frosted glass (glass() blurring what is behind it), 1px light borders, the diagonal specular sheen, frost grain, glossy orbs, glass pills and glowing lines.
+- Drop the kit's props: the dark violet dashboard, the neural network, the cat/dog tiles, the accuracy chart, the chat card and the stat chips.
+- Draw every subject accurately: a modern smartphone, the Gojek app's structure (from my screenshots if supplied), a plausible street map, a KRL line, food and groceries.
+- Finishing passes, on every frame:
+  - frost grain on every glass surface (noisePattern at the reference strength)
+  - dithered gradients
+  - a very light stage vignette (H.vignette strength ≈0.12)
+  - motion blur on fast moves
+  Don't simplify or skip them to save effort.
+- Every frame is a pure function of t: create all randomness from H.rng(seed) / H.makeNoise(seed) inside the draw (never Math.random), so the same t always gives the same frame. Caching static textures, glyphs and blurred plates across frames is fine.
+- Keep frames fast (well under 100 ms each at 1080×1920). Do every blur on ¼-resolution layers.
+- In the reference, `glassExplainer()` is the explainer (it explains "How does AI learn?") and `draw()` is the single hero frame of the kit; `glassSound(k)` is its sound design. Study them, but do not reuse that topic.
+
+STRUCTURE
+- A hook that gets out of the way within ~1.4 s (lock screen + Gojek notification).
+- Then beats where something lands every 0.3–1.3 s, with keyframes on the music's beat (≈108 BPM, beat ≈0.556 s).
+- Routes and lines that draw on to show flow; labels and chips that land on what they label.
+- One emphasis move on the key moment: the GoFood lens bloom on the drop at 13.80.
+- The takeaway ("gojek" logo + "#PastiAdaJalan") held ≥ 2.5 s at the end, then a seamless loop.
+
+FLOW BETWEEN BEATS
+- This film is one continuous shot. Every beat hands over through one persistent element:
+
+  Gojek icon → banner → home → GoRide tile → booking sheet → option card → "Pesan" → driver card → call → driver pin → (through the glass) → route → KRL line → bike pin → trip card → check → lens → GoFood → payment row → status → dish → bag → GoSend puck → code → check → GoMart bag ← groceries → receipts → tiles → home grid → app close → logo → loop
+
+- The camera keeps moving through every beat: whip, float, dive, roll, pass-through, follow, pull-out, orbit, whip.
+- Never hard-cut and never cross-fade whole frames. The style's own scene changes are: diving into the screen, passing through the glass, the lens bloom, pull-out reveals and the app close.
+
+SOUND (no voiceover: a fuller mix)
+- Sync is everything: a sound starts on the exact frame its event appears, using the same T table as the picture.
+- Score the events that land:
+  - whips, dives and pull-outs
+  - tiles flying and locking, cards growing, roll steps settling
+  - pins and chips landing, the lens bloom (the biggest hit, on the drop)
+  - the delivered check, the logo settling, and the takeaway (a resolving chord)
+- Palette: the kit's glass recipes (glass taps, soft chimes, airy frost slides, glowing-line shimmers, low glides) plus the SOUND kit's whoosh / swish / pop / tick / tock / thud / blip / sparkle / ding / shutter. Add two custom sounds:
+  - a deep soft "bwoom": a sine sweep from ≈100 Hz down to ≈42 Hz with a brown-noise thump
+  - a held breakdown sub (≈55 Hz, low-passed)
+  Counters and digit rolls tick at most ~12 times a second.
+- Music (bpm 108, chords in a bright major key, for example Cmaj7 → Am7 → Fmaj7 → G7; music gain ≤ 0.35):
+  - k.music('pad') 0–1.40
+  - k.music('pulse') 1.40–11.00
+  - breakdown 11.00–13.80: k.music('pad') + the held sub + a riser
+  - THE DROP at 13.80
+  - k.music('pulse') 13.80–25.00, a stop at 25.00
+  - k.music('pad') 25.00–29.00 with the resolving chord at 26.15
+  - silence, then the whoosh out
+- Keep a hierarchy: effects in front, music clearly underneath, no more than ~3 sounds at once, and small silences so the big hits read.
+
+RENDER (Claude Code with a shell)
+- Video: render an MP4 by loading gojek-reel.html in headless Chrome (puppeteer), calling window.seek(i/30) for each of the 900 frames, capturing the 1080×1920 canvas and piping the frames into ffmpeg (libx264, yuv420p, -r 30, -crf 18, -movflags +faststart).
+- Audio: render the effects to a WAV with `SOUND.renderOffline(window.scoreSound, DURATION, 48000, { voiceover: false })` (it returns interleaved stereo floats), and mux it in as AAC 48 kHz 192 kbps.
+- Output: gojek-reel-1080x1920.mp4.
+- Before muxing, grab stills at 0.9, 3.0, 4.3, 6.9, 8.6, 9.8, 13.2, 14.1, 16.0, 19.0, 21.6, 23.3 and 26.6 s and show them to me next to the matching storyboard panels.
+
+STYLE CARD
+Name: Device Morph Showcase (Gojek edition)
+Family: Dimensional (built on the Glassmorphism UI kit)
+Look: One unbranded modern smartphone floats on a pale warm-grey studio cyclorama, with a soft, wide hover shadow. The background is a heavily blurred echo of whatever is on its screen. Inside the screen is a polished Gojek-style UI: a green sphere lock-screen wallpaper, a glossy mint-to-green glass clock, white home tiles, frosted cards, glass pills and liquid-glass circular pins with bright refractive rims. Gojek green #00AA13 leads; amber is a small warm accent.
+Motion: The camera never stops: it whips in, floats, dives into the screen, rolls, passes through the glass into a full-screen map world, follows a moving pin, pulls back out to the phone, orbits and whips out to loop. Between beats, one UI element always becomes the next:
+- tiles burst off the glass toward the lens
+- cards grow out of icons and barrel-roll like slot reels
+- a check circle blooms into a refractive glass lens
+- a dish photo collapses into an icon
+- icons spin out and swirl in
+- routes draw on
+- the app closes into the logo
+How it explains: One day told through one app, with no narration. The status-bar clock rolls from 07.00 to 21.00, and each chapter is a Gojek service handing over to the next: GoRide → KRL (GoTransit) → GoFood → GoSend → GoMart → Gojek PLUS. The day folds back into the home grid and lands on the Gojek logo and #PastiAdaJalan.
+
+REFERENCE MATERIAL BELOW — unchanged from the original style kit (Glassmorphism UI). The reference is landscape 1280x720 on a dark violet dashboard; adapt it as described above (FORMAT, DEVICE RIG, PALETTE).
+
+H HELPER LIBRARY (lib/harness.js; the registerStyle/H.render parts are only needed by the original gallery)
+```js
+// Shared helpers + style registry for the style-frame explorations.
+// Every style is a pure function of time: draw(ctx, W, H, t). Same t => same pixels.
+(function () {
+  const STYLES = (window.STYLES = window.STYLES || []);
+  window.registerStyle = (s) => STYLES.push(s);
+
+  const H = (window.H = {});
+
+  // ---------- seeded randomness ----------
+  // H.rng(seed) -> r() in [0,1). Extras: r.range(a,b), r.int(a,b), r.pick(arr), r.gauss(), r.chance(p)
+  H.rng = function (seed = 1) {
+    let a = typeof seed === 'string' ? hashStr(seed) : (seed >>> 0) || 1;
+    const r = function () {
+      a |= 0; a = (a + 0x6d2b79f5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    r.range = (lo, hi) => lo + r() * (hi - lo);
+    r.int = (lo, hi) => Math.floor(lo + r() * (hi - lo + 1));
+    r.pick = (arr) => arr[Math.floor(r() * arr.length)];
+    r.chance = (p) => r() < p;
+    r.gauss = () => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    return r;
+  };
+  function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+  // ---------- gradient noise ----------
+  // H.makeNoise(seed) -> { n2(x,y), n3(x,y,z), fbm2(x,y,oct), fbm3(x,y,z,oct) }  (outputs roughly -1..1)
+  H.makeNoise = function (seed = 1) {
+    const r = H.rng(seed), p = new Uint8Array(512), perm = [...Array(256).keys()];
+    for (let i = 255; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [perm[i], perm[j]] = [perm[j], perm[i]]; }
+    for (let i = 0; i < 512; i++) p[i] = perm[i & 255];
+    const fade = (t) => t * t * t * (t * (t * 6 - 15) + 10);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const g3 = (h, x, y, z) => { h &= 15; const u = h < 8 ? x : y, v = h < 4 ? y : h === 12 || h === 14 ? x : z; return ((h & 1) ? -u : u) + ((h & 2) ? -v : v); };
+    function n3(x, y, z) {
+      const X = Math.floor(x) & 255, Y = Math.floor(y) & 255, Z = Math.floor(z) & 255;
+      x -= Math.floor(x); y -= Math.floor(y); z -= Math.floor(z);
+      const u = fade(x), v = fade(y), w = fade(z);
+      const A = p[X] + Y, AA = p[A] + Z, AB = p[A + 1] + Z, B = p[X + 1] + Y, BA = p[B] + Z, BB = p[B + 1] + Z;
+      return lerp(lerp(lerp(g3(p[AA], x, y, z), g3(p[BA], x - 1, y, z), u), lerp(g3(p[AB], x, y - 1, z), g3(p[BB], x - 1, y - 1, z), u), v),
+        lerp(lerp(g3(p[AA + 1], x, y, z - 1), g3(p[BA + 1], x - 1, y, z - 1), u), lerp(g3(p[AB + 1], x, y - 1, z - 1), g3(p[BB + 1], x - 1, y - 1, z - 1), u), v), w);
+    }
+    const n2 = (x, y) => n3(x, y, 0.5);
+    const fbm3 = (x, y, z, oct = 4) => { let s = 0, a = 0.5, f = 1, norm = 0; for (let i = 0; i < oct; i++) { s += a * n3(x * f, y * f, z * f); norm += a; a *= 0.5; f *= 2; } return s / norm; };
+    const fbm2 = (x, y, oct = 4) => fbm3(x, y, 0.5, oct);
+    return { n2, n3, fbm2, fbm3 };
+  };
+
+  // ---------- math ----------
+  H.lerp = (a, b, t) => a + (b - a) * t;
+  H.clamp = (v, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, v));
+  H.map = (v, a, b, c, d) => c + ((v - a) / (b - a)) * (d - c);
+  H.smooth = (e0, e1, x) => { const t = H.clamp((x - e0) / (e1 - e0)); return t * t * (3 - 2 * t); };
+  H.ease = {
+    inOut: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+    out: (t) => 1 - Math.pow(1 - t, 3),
+    in: (t) => t * t * t,
+    back: (t) => { const c = 1.70158; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); },
+  };
+
+  // ---------- color ----------
+  H.hex = (h) => { h = h.replace('#', ''); if (h.length === 3) h = h.split('').map((c) => c + c).join(''); const n = parseInt(h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+  H.rgba = (hexOrArr, a = 1) => { const [r, g, b] = Array.isArray(hexOrArr) ? hexOrArr : H.hex(hexOrArr); return `rgba(${r | 0},${g | 0},${b | 0},${a})`; };
+  H.mix = (c1, c2, t) => { const a = Array.isArray(c1) ? c1 : H.hex(c1), b = Array.isArray(c2) ? c2 : H.hex(c2); return [0, 1, 2].map((i) => a[i] + (b[i] - a[i]) * t); };
+
+  // ---------- canvas utilities ----------
+  // Offscreen canvas of the same logical size (use for layers, masks, compositing).
+  H.layer = (W, H_, ) => { const c = document.createElement('canvas'); c.width = W; c.height = H_; return c; };
+  // Monochrome grain / film noise over the whole canvas. amount ~ 0.03-0.15
+  H.grain = function (ctx, W, Hh, amount = 0.08, seed = 7, mono = true) {
+    const img = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height), d = img.data, r = H.rng(seed), k = amount * 255;
+    for (let i = 0; i < d.length; i += 4) {
+      const n = (r() - 0.5) * k;
+      if (mono) { d[i] += n; d[i + 1] += n; d[i + 2] += n; }
+      else { d[i] += (r() - 0.5) * k; d[i + 1] += (r() - 0.5) * k; d[i + 2] += (r() - 0.5) * k; }
+    }
+    ctx.putImageData(img, 0, 0);
+  };
+  // Paper-ish texture tile: fills with base color + fibrous noise (cheap; drawn into ctx).
+  H.paper = function (ctx, W, Hh, base = '#f3ecdc', seed = 3, strength = 0.06) {
+    ctx.save(); ctx.fillStyle = base; ctx.fillRect(0, 0, W, Hh);
+    const nz = H.makeNoise(seed), cell = 4, [br, bg, bb] = H.hex(base);
+    for (let y = 0; y < Hh; y += cell) for (let x = 0; x < W; x += cell) {
+      const v = nz.fbm2(x * 0.01, y * 0.01, 3) * 0.6 + nz.n2(x * 0.15, y * 0.04) * 0.4;
+      const s = 1 + v * strength * 2;
+      ctx.fillStyle = `rgb(${br * s | 0},${bg * s | 0},${bb * s | 0})`; ctx.fillRect(x, y, cell, cell);
+    }
+    ctx.restore();
+  };
+  // Vignette
+  H.vignette = function (ctx, W, Hh, strength = 0.5, color = '0,0,0') {
+    const g = ctx.createRadialGradient(W / 2, Hh / 2, Math.min(W, Hh) * 0.3, W / 2, Hh / 2, Math.hypot(W, Hh) * 0.6);
+    g.addColorStop(0, `rgba(${color},0)`); g.addColorStop(1, `rgba(${color},${strength})`);
+    ctx.save(); ctx.fillStyle = g; ctx.fillRect(0, 0, W, Hh); ctx.restore();
+  };
+
+  // ---------- rendering entry ----------
+  // Renders style into canvas at logical 1280x720 (canvas can be any pixel size; it is scaled).
+  H.W = 1280; H.H = 720;
+  H.loadFonts = async function (style) {
+    const specs = style.fonts || [];
+    try { const sample = 'AaZz09' + (window.FONT_SAMPLE || '');
+      await Promise.all(specs.map((f) => document.fonts.load(f, sample))); await document.fonts.ready; } catch (e) { /* render anyway */ }
+  };
+  H.render = function (style, canvas, t) {
+    const ctx = canvas.getContext('2d', { willReadFrequently: !!style.readsPixels });
+    const sx = canvas.width / H.W, sy = canvas.height / H.H;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.filter = 'none';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save(); ctx.scale(sx, sy);
+    style.draw(ctx, H.W, H.H, t == null ? style.frameT || 0 : t);
+    ctx.restore();
+  };
+})();
+```
+
+SOUND KIT (lib/sound.js)
+```js
+// sound.js: a small synthesized sound kit for the style explainers. Plain Web Audio, no audio files.
+// Voiceover mode: SOUND.kit(ctx, { voiceover: true }) drops beds and music, plays anything marked minor
+// (play(..., { minor: true }), tone/noise { minor: true }, or scheduled inside k.withMinor(() => ...)) at about 60%
+// volume instead of full, and sits all effects a little lower, so the narration stays on top while the piece still
+// sounds alive. In the full mix, minor sounds play at full volume. Scores can read k.vo to branch further.
+// A style adds   explainerSound(k) { k.bed('room', 0, D); k.play('pop', 1.25); ... }   and the same
+// call schedules into a live AudioContext (the player) or an OfflineAudioContext (the video render).
+// Times are seconds on the explainer's own clock. Randomness is seeded, so every render is identical.
+(function () {
+  'use strict';
+  const SOUND = (window.SOUND = {});
+  const TINY = 1e-4;
+
+  // seeded random in [0,1), keyed by any string
+  function rand(key) {
+    let h = 2166136261;
+    for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619); }
+    let a = h >>> 0 || 1;
+    return () => { a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+
+  // note names to Hz: 'A4' = 440, 'C#5', 'Eb3'
+  const STEP = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+  function hz(n) {
+    if (typeof n === 'number') return n;
+    const m = /^([A-G])([#b]?)(-?\d)$/.exec(n);
+    const semis = STEP[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0) + (Number(m[3]) - 4) * 12 - 9;
+    return 440 * Math.pow(2, semis / 12);
+  }
+  SOUND.hz = hz;
+
+  SOUND.kit = function (ctx, opts) {
+    const o = opts || {};
+    const VO = !!o.voiceover;
+    const MINOR = 0.6; // voiceover-mode volume for minor sounds
+    let inMinor = false;
+    const gainOf = (p, d) => (p.gain == null ? d : p.gain) * (VO && (p.minor || inMinor) ? MINOR : 1);
+    const T0 = (o.start || 0) - 0; // explainer time that maps to ctx time `base`
+    const base = ctx.currentTime + (o.delay || 0);
+    // Start times snap to the sample grid (+ a quarter sample): in Chrome a source started a hair off the grid can
+    // spike to about twice its set level.
+    const SR = ctx.sampleRate;
+    const at = (t) => (Math.round((base + (t - T0)) * SR) + 0.25) / SR;
+
+    // ---- buses: sfx, amb, music -> compressor -> master; one shared reverb send
+    const master = ctx.createGain(); master.gain.value = o.master == null ? 0.9 : o.master;
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -16; comp.knee.value = 8; comp.ratio.value = 3; comp.attack.value = 0.004; comp.release.value = 0.18;
+    comp.connect(master); master.connect(o.dest || ctx.destination);
+    const bus = {};
+    for (const [name, g] of Object.entries({ sfx: VO ? 0.7 : 0.85, amb: 0.5, music: 0.45 })) { bus[name] = ctx.createGain(); bus[name].gain.value = g; bus[name].connect(comp); }
+
+    // generated room reverb: decaying stereo noise, darker toward the tail
+    const verb = ctx.createConvolver();
+    {
+      const secs = 1.6, n = Math.floor(secs * ctx.sampleRate), ir = ctx.createBuffer(2, n, ctx.sampleRate);
+      for (let c = 0; c < 2; c++) {
+        const r = rand('verb' + c), d = ir.getChannelData(c); let lp = 0;
+        for (let i = 0; i < n; i++) { const u = i / n; lp += (0.6 - 0.45 * u) * ((r() * 2 - 1) - lp); d[i] = lp * Math.pow(1 - u, 3); }
+      }
+      verb.buffer = ir;
+    }
+    const verbIn = ctx.createGain(); verbIn.gain.value = 0.9; verbIn.connect(verb); verb.connect(comp);
+
+    // seeded noise buffers: white, pink-ish and brown
+    const noiseBuf = {};
+    {
+      const n = Math.floor(2.5 * ctx.sampleRate);
+      for (const kind of ['white', 'pink', 'brown']) {
+        const b = ctx.createBuffer(1, n, ctx.sampleRate), d = b.getChannelData(0), r = rand('noise-' + kind);
+        let p0 = 0, p1 = 0, p2 = 0, br = 0;
+        for (let i = 0; i < n; i++) {
+          const w = r() * 2 - 1;
+          if (kind === 'white') d[i] = w;
+          else if (kind === 'pink') { p0 = 0.997 * p0 + 0.029 * w; p1 = 0.985 * p1 + 0.032 * w; p2 = 0.95 * p2 + 0.048 * w; d[i] = (p0 + p1 + p2 + w * 0.05) * 2.2; }
+          else { br = (br + 0.02 * w) / 1.02; d[i] = br * 3.2; }
+        }
+        noiseBuf[kind] = b;
+      }
+    }
+
+    // ---- automation helpers
+    // a value or [[dt, value], ...] from the voice start; ramps are exponential (frequencies)
+    function sweep(param, v, t) {
+      if (!Array.isArray(v)) { param.setValueAtTime(v, t); return; }
+      param.setValueAtTime(v[0][1], t + v[0][0]);
+      for (let i = 1; i < v.length; i++) param.exponentialRampToValueAtTime(Math.max(v[i][1], 1), t + v[i][0]);
+    }
+    // amplitude: linear attack to `gain`, optional hold, exponential release to silence by `dur`
+    function shape(param, t, gain, dur, a, hold) {
+      a = Math.min(a == null ? 0.004 : a, dur * 0.9);
+      hold = Math.min(hold || 0, dur - a);
+      param.setValueAtTime(0, t);
+      param.linearRampToValueAtTime(gain, t + a);
+      if (hold > 0) param.setValueAtTime(gain, t + a + hold);
+      param.exponentialRampToValueAtTime(TINY, t + dur);
+      param.setValueAtTime(0, t + dur + 0.001);
+    }
+    function out(node, p) {
+      const pan = ctx.createStereoPanner(); pan.pan.value = Math.max(-1, Math.min(1, p.pan || 0));
+      node.connect(pan); pan.connect(bus[p.bus || 'sfx']);
+      if (p.verb) { const s = ctx.createGain(); s.gain.value = p.verb; pan.connect(s); s.connect(verbIn); }
+    }
+    function filterNode(p, t) {
+      if (!p.filter) return null;
+      const f = ctx.createBiquadFilter(); f.type = p.filter; f.Q.value = p.q == null ? 1 : p.q;
+      sweep(f.frequency, p.f == null ? 1000 : p.f, t);
+      return f;
+    }
+
+    // ---- primitives
+    // tone(t, { f, type, dur, gain, a, hold, pan, verb, bus, filter, f2 (filter freq), q, detune })
+    function tone(time, p) {
+      const t = at(time), dur = p.dur || 0.2;
+      if (t + dur < ctx.currentTime || (time < T0 - 0.001 && dur < 1.5)) return;
+      const osc = ctx.createOscillator(); osc.type = p.type || 'sine';
+      sweep(osc.frequency, Array.isArray(p.f) ? p.f.map(([d, v]) => [d, hz(v)]) : hz(p.f || 440), t);
+      if (p.detune) osc.detune.value = p.detune;
+      const g = ctx.createGain(); shape(g.gain, t, gainOf(p, 0.3), dur, p.a, p.hold);
+      let node = osc;
+      if (p.filter) { const f = ctx.createBiquadFilter(); f.type = p.filter; f.Q.value = p.q == null ? 0.8 : p.q; sweep(f.frequency, p.f2 || 2000, t); osc.connect(f); node = f; }
+      node.connect(g); out(g, p);
+      osc.start(t); osc.stop(t + dur + 0.02);
+    }
+    // noise(t, { dur, color, filter, f, q, gain, a, hold, pan, verb, bus, rate })
+    function noise(time, p) {
+      const t = at(time), dur = p.dur || 0.2;
+      if (t + dur < ctx.currentTime || (time < T0 - 0.001 && dur < 1.5)) return;
+      const src = ctx.createBufferSource(); src.buffer = noiseBuf[p.color || 'white']; src.loop = true;
+      if (p.rate) src.playbackRate.value = p.rate;
+      const g = ctx.createGain(); shape(g.gain, t, gainOf(p, 0.3), dur, p.a, p.hold);
+      const f = filterNode(p, t);
+      if (f) { src.connect(f); f.connect(g); } else src.connect(g);
+      out(g, p);
+      const off = rand('off' + time + (p.f || ''))() * 2;
+      src.start(t, off); src.stop(t + dur + 0.02);
+    }
+
+    // ---- named sounds. play(name, t, opts): opts.gain scales the whole sound, opts.pan places it.
+    const S = {
+      // UI / motion graphics
+      pop: (t, o) => { tone(t, { f: [[0, o.f || 620], [0.07, (o.f || 620) * 0.45]], dur: 0.1, gain: 0.32 * o.g, pan: o.pan }); noise(t, { dur: 0.012, filter: 'highpass', f: 3000, gain: 0.12 * o.g, pan: o.pan }); },
+      tick: (t, o) => noise(t, { dur: 0.018, filter: 'bandpass', f: o.f || 4200, q: 2.5, gain: 0.3 * o.g, pan: o.pan }),
+      click: (t, o) => { tone(t, { f: o.f || 1900, type: 'square', dur: 0.02, gain: 0.08 * o.g, filter: 'lowpass', f2: 3000, pan: o.pan }); noise(t, { dur: 0.01, filter: 'highpass', f: 2500, gain: 0.15 * o.g, pan: o.pan }); },
+      tock: (t, o) => { tone(t, { f: o.f || 820, dur: 0.07, gain: 0.25 * o.g, pan: o.pan }); noise(t, { dur: 0.05, filter: 'bandpass', f: o.f || 820, q: 9, gain: 0.35 * o.g, pan: o.pan }); },
+      blip: (t, o) => tone(t, { f: o.f || 'E6', type: o.type || 'square', dur: o.dur || 0.07, gain: 0.07 * o.g, a: 0.002, hold: (o.dur || 0.07) * 0.6, pan: o.pan }),
+      whoosh: (t, o) => { const d = o.dur || 0.45; noise(t, { dur: d, color: 'pink', filter: 'bandpass', f: [[0, 350], [d * 0.55, o.top || 2600], [d, 700]], q: 0.9, gain: 0.32 * o.g, a: d * 0.5, pan: o.pan, verb: 0.15 }); },
+      swish: (t, o) => { const d = o.dur || 0.18; noise(t, { dur: d, filter: 'highpass', f: [[0, 1800], [d, 5200]], q: 0.7, gain: 0.22 * o.g, a: d * 0.35, pan: o.pan }); },
+      riser: (t, o) => { const d = o.dur || 0.8; noise(t, { dur: d, color: 'pink', filter: 'bandpass', f: [[0, 300], [d, 4000]], q: 1.2, gain: 0.25 * o.g, a: d * 0.95, pan: o.pan, verb: 0.2 }); tone(t, { f: [[0, 180], [d, 720]], type: 'triangle', dur: d, gain: 0.06 * o.g, a: d * 0.9 }); },
+      thud: (t, o) => { tone(t, { f: [[0, o.f || 130], [0.16, 42]], dur: 0.26, gain: 0.55 * o.g, pan: o.pan }); noise(t, { dur: 0.09, color: 'brown', filter: 'lowpass', f: 500, gain: 0.35 * o.g, pan: o.pan }); },
+      impact: (t, o) => { S.thud(t, o); noise(t, { dur: 0.7, color: 'pink', filter: 'lowpass', f: [[0, 2400], [0.6, 300]], gain: 0.3 * o.g, verb: 0.35, pan: o.pan }); },
+      stamp: (t, o) => { S.thud(t, { ...o, f: 160 }); noise(t, { dur: 0.05, filter: 'bandpass', f: 1300, q: 1.2, gain: 0.4 * o.g, pan: o.pan }); noise(t + 0.004, { dur: 0.012, filter: 'highpass', f: 3500, gain: 0.25 * o.g, pan: o.pan }); },
+      ding: (t, o) => { const f = hz(o.f || 'E6'); tone(t, { f, dur: 1.3, gain: 0.2 * o.g, verb: 0.3, pan: o.pan }); tone(t, { f: f * 2.76, dur: 0.5, gain: 0.05 * o.g, verb: 0.3, pan: o.pan }); },
+      success: (t, o) => { S.ding(t, { ...o, f: o.f || 'C6' }); S.ding(t + 0.09, { ...o, f: hz(o.f || 'C6') * 1.5, g: o.g * 0.9 }); },
+      error: (t, o) => { tone(t, { f: o.f || 'A3', type: 'square', dur: 0.13, gain: 0.09 * o.g, hold: 0.08, filter: 'lowpass', f2: 1400, pan: o.pan }); tone(t + 0.15, { f: hz(o.f || 'A3') * 0.8, type: 'square', dur: 0.22, gain: 0.09 * o.g, hold: 0.14, filter: 'lowpass', f2: 1200, pan: o.pan }); },
+      buzz: (t, o) => { const d = o.dur || 0.3; tone(t, { f: o.f || 110, type: 'sawtooth', dur: d, gain: 0.12 * o.g, hold: d * 0.7, filter: 'lowpass', f2: 900, pan: o.pan }); tone(t, { f: (o.f || 110) * 1.01, type: 'sawtooth', dur: d, gain: 0.1 * o.g, hold: d * 0.7, filter: 'lowpass', f2: 900, pan: o.pan }); },
+      sparkle: (t, o) => { const r = rand('sparkle' + t), notes = ['C6', 'D6', 'E6', 'G6', 'A6', 'C7']; for (let i = 0; i < (o.n || 6); i++) { const ti = t + i * 0.04 + r() * 0.01, f = hz(notes[Math.floor(r() * notes.length)]), pan = r() * 1.2 - 0.6; tone(ti, { f, dur: 0.6, gain: 0.04 * o.g, a: 0.002, verb: 0.35, pan }); tone(ti, { f: f * 2.76, dur: 0.2, gain: 0.012 * o.g, a: 0.002, pan }); } },
+      glitch: (t, o) => { const r = rand('glitch' + t); for (let i = 0; i < 7; i++) tone(t + i * 0.022, { f: 200 + r() * 1800, type: 'square', dur: 0.02, gain: 0.07 * o.g, a: 0.001, hold: 0.015, pan: r() * 1.4 - 0.7 }); noise(t, { dur: 0.16, filter: 'bandpass', f: 2500, q: 0.6, gain: 0.12 * o.g }); },
+      shutter: (t, o) => { S.click(t, o); noise(t + 0.06, { dur: 0.04, filter: 'bandpass', f: 2200, q: 1, gain: 0.2 * o.g, pan: o.pan }); },
+      count: (t, o) => S.tick(t, { ...o, f: o.f || 5200, g: o.g * 0.7 }),
+
+      // hand-made media
+      // stroke: a pen/marker/chalk/pencil stroke over `dur` seconds. material sets the surface sound.
+      stroke: (t, o) => {
+        const d = o.dur || 0.4, m = o.material || 'marker', r = rand('stroke' + m + t);
+        const M = {
+          marker: { f: 2900, q: 2.2, g: 0.16, grain: 0.05 },
+          chalk: { f: 1700, q: 0.6, g: 0.22, grain: 0.028 },
+          pencil: { f: 4600, q: 0.8, g: 0.16, grain: 0.04, filter: 'highpass' },
+          pen: { f: 4200, q: 1.6, g: 0.08, grain: 0.06 },
+          brush: { f: 900, q: 0.5, g: 0.1, grain: 0.09, color: 'pink' },
+          sharpie: { f: 2400, q: 1.4, g: 0.2, grain: 0.045 },
+        }[m];
+        for (let x = 0; x < d; x += M.grain * (0.7 + r() * 0.6)) {
+          const gd = M.grain * (0.8 + r() * 0.9);
+          noise(t + x, { dur: gd, color: M.color, filter: M.filter || 'bandpass', f: M.f * (0.8 + r() * 0.4), q: M.q, gain: M.g * o.g * (0.6 + r() * 0.5), a: gd * 0.3, pan: (o.pan || 0) + (r() - 0.5) * 0.2 });
+        }
+      },
+      // paper: picking up / slapping down / turning a sheet
+      paper: (t, o) => { const d = o.dur || 0.35, r = rand('paper' + t); for (let x = 0; x < d; x += 0.025 + r() * 0.03) noise(t + x, { dur: 0.05, filter: 'bandpass', f: 1200 + r() * 2600, q: 0.9, gain: 0.12 * o.g * (1 - x / d * 0.5), pan: o.pan }); },
+      slap: (t, o) => { noise(t, { dur: 0.07, filter: 'highpass', f: 900, gain: 0.45 * o.g, a: 0.001, pan: o.pan }); tone(t, { f: [[0, 180], [0.06, 70]], dur: 0.1, gain: 0.25 * o.g, pan: o.pan }); },
+      tape: (t, o) => { noise(t, { dur: o.dur || 0.5, filter: 'bandpass', f: [[0, 900], [o.dur || 0.5, 2200]], q: 1.8, gain: 0.18 * o.g, a: 0.02, pan: o.pan }); },
+      press: (t, o) => { S.thud(t, { ...o, f: 95, g: o.g * 0.9 }); noise(t + 0.01, { dur: 0.25, color: 'brown', filter: 'lowpass', f: 700, gain: 0.25 * o.g, pan: o.pan }); },
+      roller: (t, o) => { const d = o.dur || 0.6; noise(t, { dur: d, color: 'brown', filter: 'bandpass', f: 380, q: 1.5, gain: 0.3 * o.g, a: 0.05, hold: d * 0.6, pan: o.pan }); for (let x = 0; x < d; x += 0.07) S.tock(t + x, { f: 300, g: o.g * 0.15, pan: o.pan }); },
+      erase: (t, o) => { const d = o.dur || 0.6, r = rand('erase' + t); for (let x = 0; x < d; x += 0.06 + r() * 0.04) noise(t + x, { dur: 0.08, color: 'pink', filter: 'bandpass', f: 700 + r() * 500, q: 0.8, gain: 0.22 * o.g, a: 0.03, pan: (r() - 0.5) * 0.5 }); },
+
+      // machines and screens
+      key: (t, o) => { const r = rand('key' + t); noise(t, { dur: 0.025, filter: 'bandpass', f: 2600 + r() * 1200, q: 2, gain: 0.25 * o.g, a: 0.001, pan: o.pan }); tone(t, { f: 160 + r() * 40, dur: 0.04, gain: 0.12 * o.g, pan: o.pan }); },
+      typing: (t, o) => { const r = rand('typing' + t), n = o.n || 8, rate = o.rate || 0.09; for (let i = 0; i < n; i++) S.key(t + i * rate * (0.75 + r() * 0.5), { g: o.g * (0.7 + r() * 0.4), pan: o.pan }); },
+      typebar: (t, o) => { S.key(t, o); noise(t + 0.008, { dur: 0.03, filter: 'bandpass', f: 1100, q: 4, gain: 0.35 * o.g, pan: o.pan }); },
+      bell: (t, o) => S.ding(t, { ...o, f: o.f || 'A6' }),
+      boot: (t, o) => { tone(t, { f: [[0, 80], [0.35, 1600]], type: 'sine', dur: 0.5, gain: 0.08 * o.g, a: 0.3 }); S.blip(t + 0.45, { ...o, f: 'C6', dur: 0.12 }); },
+      crtOn: (t, o) => { noise(t, { dur: 0.25, filter: 'highpass', f: 2000, gain: 0.2 * o.g, a: 0.001 }); tone(t, { f: 15700, dur: 1.5, gain: 0.02 * o.g, a: 0.1, hold: 1 }); S.thud(t, { ...o, f: 90, g: o.g * 0.5 }); },
+      neon: (t, o) => { const d = o.dur || 0.25, r = rand('neon' + t); for (let x = 0; x < d; x += 0.035 + r() * 0.04) tone(t + x, { f: 120, type: 'sawtooth', dur: 0.03, gain: 0.3 * o.g * (0.5 + r() * 0.5), filter: 'bandpass', f2: 1200, q: 1.2, pan: o.pan }); },
+      // chip (8-bit console) sounds: raw square/triangle, no filtering
+      coin: (t, o) => { tone(t, { f: 'B5', type: 'square', dur: 0.07, gain: 0.07 * o.g, a: 0.001, hold: 0.06 }); tone(t + 0.07, { f: 'E6', type: 'square', dur: 0.3, gain: 0.07 * o.g, a: 0.001, hold: 0.1 }); },
+      jump: (t, o) => tone(t, { f: [[0, 260], [0.16, 820]], type: 'square', dur: 0.18, gain: 0.07 * o.g, a: 0.001, hold: 0.12 }),
+      hurt: (t, o) => { tone(t, { f: [[0, 600], [0.25, 90]], type: 'square', dur: 0.28, gain: 0.08 * o.g, a: 0.001, hold: 0.2 }); noise(t, { dur: 0.2, filter: 'lowpass', f: 1800, gain: 0.15 * o.g, rate: 0.25 }); },
+      powerup: (t, o) => ['C5', 'E5', 'G5', 'C6', 'E6', 'G6', 'C7'].forEach((n, i) => tone(t + i * 0.045, { f: n, type: 'square', dur: 0.06, gain: 0.06 * o.g, a: 0.001, hold: 0.05 })),
+      select: (t, o) => { S.blip(t, { ...o, f: 'A5', dur: 0.04 }); S.blip(t + 0.05, { ...o, f: 'E6', dur: 0.05 }); },
+      text: (t, o) => { const n = o.n || 10, rate = o.rate || 0.05; for (let i = 0; i < n; i++) tone(t + i * rate, { f: i % 2 ? 'C6' : 'G5', type: 'square', dur: 0.025, gain: 0.04 * o.g, a: 0.001, hold: 0.015 }); },
+    };
+
+    function play(name, t, opts) {
+      const fn = S[name];
+      if (!fn) throw new Error('unknown sound: ' + name);
+      const o2 = Object.assign({}, opts); o2.g = o2.gain == null ? 1 : o2.gain;
+      if (opts && opts.minor) withMinor(() => fn(t, o2)); else fn(t, o2);
+    }
+
+    // everything scheduled inside fn counts as minor (quieter in voiceover mode)
+    function withMinor(fn) { const was = inMinor; inMinor = true; try { fn(); } finally { inMinor = was; } }
+
+    // ---- beds: continuous sound under a stretch of time. bed(name, t0, t1, opts)
+    function bed(name, t0, t1, p) {
+      if (VO) return;
+      p = p || {}; const g = p.gain == null ? 1 : p.gain, d = t1 - t0, fade = Math.min(0.4, d / 4);
+      const long = (q) => Object.assign({ dur: d, a: fade, hold: d - fade * 2, bus: 'amb' }, q);
+      if (name === 'room') noise(t0, long({ color: 'brown', filter: 'lowpass', f: 320, gain: 0.12 * g }));
+      else if (name === 'hiss') noise(t0, long({ color: 'pink', filter: 'highpass', f: 5000, gain: 0.02 * g }));
+      else if (name === 'hum') { tone(t0, long({ f: 60, gain: 0.05 * g })); tone(t0, long({ f: 120, gain: 0.025 * g })); tone(t0, long({ f: 180, type: 'triangle', gain: 0.012 * g })); }
+      else if (name === 'rain') { noise(t0, long({ color: 'pink', filter: 'bandpass', f: 2500, q: 0.4, gain: 0.08 * g })); const r = rand('rain'); for (let x = 0; x < d; x += 0.04 + r() * 0.08) noise(t0 + x, { dur: 0.01, filter: 'highpass', f: 4000, gain: 0.04 * g * r(), bus: 'amb', pan: r() * 1.6 - 0.8 }); }
+      else if (name === 'projector') { noise(t0, long({ color: 'pink', filter: 'highpass', f: 3000, gain: 0.03 * g })); for (let x = 0; x < d; x += 1 / 24) S.tock(t0 + x, { f: 700, g: 0.04 * g, pan: 0.3 }); }
+      else if (name === 'vinyl') { noise(t0, long({ color: 'pink', filter: 'bandpass', f: 1500, q: 0.5, gain: 0.025 * g })); const r = rand('vinyl'); for (let x = 0; x < d; x += 0.08 + r() * 0.4) noise(t0 + x, { dur: 0.006, filter: 'highpass', f: 2500, gain: 0.08 * g * r(), bus: 'amb' }); }
+      else throw new Error('unknown bed: ' + name);
+    }
+
+    // ---- music: optional light beds that sit under the effects. music(name, t0, t1, { bpm, chords, gain })
+    // chords: list of note arrays, one per bar, cycled. e.g. [['C4','E4','G4','B4'], ['A3','C4','E4','G4']]
+    function music(name, t0, t1, p) {
+      if (VO) return;
+      p = p || {}; const g = p.gain == null ? 1 : p.gain, bpm = p.bpm || 100, beat = 60 / bpm, bar = beat * 4;
+      const chords = p.chords || [['C4', 'E4', 'G4', 'B4'], ['A3', 'C4', 'E4', 'G4'], ['F3', 'A3', 'C4', 'E4'], ['G3', 'B3', 'D4', 'F4']];
+      let i = 0;
+      for (let t = t0; t < t1 - 0.05; t += bar, i++) {
+        const ch = chords[i % chords.length], len = Math.min(bar, t1 - t);
+        if (name === 'pad' || name === 'pulse') ch.forEach((n, k) => { tone(t, { f: n, type: 'triangle', dur: len + 0.3, gain: 0.035 * g, a: 0.25, hold: len - 0.3, bus: 'music', filter: 'lowpass', f2: 1400, pan: (k - 1.5) * 0.25, verb: 0.25 }); tone(t, { f: hz(n) * 1.004, type: 'sine', dur: len + 0.3, gain: 0.03 * g, a: 0.3, hold: len - 0.3, bus: 'music' }); });
+        if (name === 'pulse') for (let b = 0; b < 4 && t + b * beat < t1 - 0.05; b++) {
+          const tb = t + b * beat;
+          tone(tb, { f: [[0, 110], [0.1, 50]], dur: 0.18, gain: (b % 2 ? 0.16 : 0.26) * g, bus: 'music' });
+          noise(tb + beat / 2, { dur: 0.04, filter: 'highpass', f: 7000, gain: 0.05 * g, bus: 'music' });
+          tone(tb + beat / 2, { f: hz(ch[0]) / 2, type: 'triangle', dur: beat * 0.45, gain: 0.08 * g, bus: 'music' });
+        }
+        if (name === 'chip') for (let s = 0; s < 8 && t + s * beat / 2 < t1 - 0.05; s++) {
+          const ts = t + s * beat / 2;
+          tone(ts, { f: hz(ch[0]) / 2, type: 'triangle', dur: beat * 0.45, gain: 0.12 * g, a: 0.001, hold: beat * 0.35, bus: 'music' });
+          tone(ts, { f: ch[[0, 1, 2, 3, 2, 1, 2, 3][s]], type: 'square', dur: beat * 0.4, gain: 0.03 * g, a: 0.001, hold: beat * 0.25, bus: 'music' });
+        }
+      }
+    }
+
+    return { play, bed, music, tone, noise, withMinor, hz, vo: VO, sounds: Object.keys(S) };
+  };
+
+  // Live playback for a player: SOUND.live(scoreFn, fromT, { voiceover, master }) starts the score from explainer time
+  // fromT right now and returns stop(). Call stop() on pause or seek, and SOUND.live again on play.
+  SOUND.live = function (fn, fromT, opts) {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    fn(SOUND.kit(ctx, Object.assign({}, opts, { start: fromT || 0, delay: 0.03 })));
+    return () => { try { ctx.close(); } catch (e) {} };
+  };
+
+  // Render a style's explainerSound into an OfflineAudioContext; returns interleaved float stereo.
+  SOUND.renderOffline = async function (fn, duration, sampleRate, kitOpts) {
+    const sr = sampleRate || 48000, len = Math.ceil(duration * sr);
+    const ctx = new OfflineAudioContext(2, len, sr);
+    fn(SOUND.kit(ctx, kitOpts || {}));
+    const buf = await ctx.startRendering();
+    const L = buf.getChannelData(0), R = buf.getChannelData(1), inter = new Float32Array(len * 2);
+    let peak = 0;
+    for (let i = 0; i < len; i++) { inter[2 * i] = L[i]; inter[2 * i + 1] = R[i]; peak = Math.max(peak, Math.abs(L[i]), Math.abs(R[i])); }
+    return { inter, peak, frames: len, sr };
+  };
+})();
+```
+
+REFERENCE STYLE SOURCE (styles/glassmorphism.js; W/H_ are always 1280x720)
+```js
+{
+  const rr = (c, x, y, w, h, r) => { c.beginPath(); c.roundRect(x, y, w, h, r); };
+  let NOISE = null;
+  function noisePattern(ctx) {
+    if (!NOISE) {
+      NOISE = H.layer(160, 160);
+      const nc = NOISE.getContext('2d'), id = nc.createImageData(160, 160), r = H.rng(99);
+      for (let i = 0; i < id.data.length; i += 4) { const v = r() < 0.5 ? 0 : 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = r() * 60; }
+      nc.putImageData(id, 0, 0);
+    }
+    return ctx.createPattern(NOISE, 'repeat');
+  }
+  // Frosted glass panel: shadow -> blurred backdrop (clipped) -> tint -> grain -> sheen -> 1px gradient border
+  function glass(ctx, src, x, y, w, h, r, o = {}) {
+    const tint = o.tint ?? 0.1;
+    ctx.save();
+    ctx.shadowColor = 'rgba(8,4,30,0.45)'; ctx.shadowBlur = o.shadow ?? 50; ctx.shadowOffsetY = (o.shadow ?? 50) * 0.4;
+    ctx.fillStyle = 'rgba(20,10,50,1)'; rr(ctx, x, y, w, h, r); ctx.fill();
+    ctx.restore();
+    ctx.save(); rr(ctx, x, y, w, h, r); ctx.clip();
+    { const M = ctx.getTransform(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(src, 0, 0, ctx.canvas.width, ctx.canvas.height); ctx.setTransform(M); }
+    const tg = ctx.createLinearGradient(x, y, x + w * 0.6, y + h);
+    tg.addColorStop(0, `rgba(255,255,255,${tint + 0.08})`); tg.addColorStop(1, `rgba(255,255,255,${tint * 0.5})`);
+    ctx.fillStyle = tg; ctx.fillRect(x, y, w, h);
+    { const A = ctx.globalAlpha; ctx.globalAlpha = A * 0.22; ctx.fillStyle = noisePattern(ctx); ctx.fillRect(x, y, w, h); ctx.globalAlpha = A; }
+    // diagonal specular sheen
+    const sg = ctx.createLinearGradient(x, y, x + w * 0.55, y + h * 0.55);
+    sg.addColorStop(0, 'rgba(255,255,255,0.16)'); sg.addColorStop(0.45, 'rgba(255,255,255,0.04)'); sg.addColorStop(0.46, 'rgba(255,255,255,0.0)');
+    ctx.fillStyle = sg; ctx.fillRect(x, y, w, h);
+    ctx.restore();
+    // 1px light border, brighter top-left
+    ctx.save();
+    const bg = ctx.createLinearGradient(x, y, x + w, y + h);
+    bg.addColorStop(0, 'rgba(255,255,255,0.65)'); bg.addColorStop(0.35, 'rgba(255,255,255,0.18)'); bg.addColorStop(0.7, 'rgba(255,255,255,0.08)'); bg.addColorStop(1, 'rgba(255,255,255,0.32)');
+    ctx.strokeStyle = bg; ctx.lineWidth = 1; rr(ctx, x + 0.5, y + 0.5, w - 1, h - 1, r); ctx.stroke();
+    // inner top highlight
+    const hg = ctx.createLinearGradient(x, 0, x + w, 0);
+    hg.addColorStop(0, 'rgba(255,255,255,0)'); hg.addColorStop(0.3, 'rgba(255,255,255,0.55)'); hg.addColorStop(0.7, 'rgba(255,255,255,0.15)'); hg.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.strokeStyle = hg; ctx.beginPath(); ctx.moveTo(x + r, y + 1.5); ctx.lineTo(x + w - r, y + 1.5); ctx.stroke();
+    ctx.restore();
+  }
+  function blurOf(srcCanvas, W, Hh, px) {
+    const L = H.layer(W, Hh), c = L.getContext('2d');
+    c.filter = `blur(${px}px) saturate(150%)`;
+    c.drawImage(srcCanvas, 0, 0, W, Hh);
+    return L;
+  }
+  function orb(ctx, x, y, r, c1, c2, c3) {
+    const g = ctx.createRadialGradient(x - r * 0.4, y - r * 0.45, r * 0.05, x, y, r);
+    g.addColorStop(0, c1); g.addColorStop(0.55, c2); g.addColorStop(1, c3);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+  }
+
+  // ================= EXPLAINER: the camera glides across one big frosted-glass dashboard; panels blur the live blobs behind them =================
+  function petIcon(ctx, kind, x, y, r, col = '#ffffff', lw = 2) {
+    ctx.save(); ctx.translate(x, y); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    if (kind === 'cat') { ctx.moveTo(-0.8 * r, -0.1 * r); ctx.lineTo(-0.7 * r, -1.0 * r); ctx.lineTo(-0.25 * r, -0.72 * r); ctx.moveTo(0.8 * r, -0.1 * r); ctx.lineTo(0.7 * r, -1.0 * r); ctx.lineTo(0.25 * r, -0.72 * r); }
+    else { ctx.moveTo(-0.62 * r, -0.62 * r); ctx.quadraticCurveTo(-1.25 * r, -0.4 * r, -0.95 * r, 0.35 * r); ctx.moveTo(0.62 * r, -0.62 * r); ctx.quadraticCurveTo(1.25 * r, -0.4 * r, 0.95 * r, 0.35 * r); }
+    ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, 0.8 * r, 0, 7); ctx.stroke();
+    ctx.fillStyle = col;
+    for (const sx of [-1, 1]) { ctx.beginPath(); ctx.arc(sx * 0.3 * r, -0.08 * r, 0.09 * r, 0, 7); ctx.fill(); }
+    ctx.beginPath(); ctx.ellipse(0, 0.25 * r, 0.12 * r, 0.08 * r, 0, 0, 7); ctx.fill();
+    ctx.restore();
+  }
+  function chipPill(ctx, x, y, text, o = {}) {
+    ctx.save(); ctx.font = o.font || '600 13px "Inter"';
+    const w = ctx.measureText(text).width + (o.dot ? 40 : 26), h = o.h || 26, k = o.k ?? 1;
+    ctx.globalAlpha *= Math.min(1, k * 1.5); ctx.translate(x, y); ctx.scale(0.85 + 0.15 * k, 0.85 + 0.15 * k);
+    if (o.grad) { const g = ctx.createLinearGradient(-w / 2, 0, w / 2, 0); g.addColorStop(0, o.grad[0]); g.addColorStop(1, o.grad[1]); ctx.fillStyle = g; ctx.shadowColor = o.glow || 'rgba(255,60,200,0.4)'; ctx.shadowBlur = 16; }
+    else ctx.fillStyle = o.bg || 'rgba(255,255,255,0.16)';
+    ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, h, h / 2); ctx.fill(); ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.roundRect(-w / 2 + 0.5, -h / 2 + 0.5, w - 1, h - 1, h / 2); ctx.stroke();
+    if (o.dot) { ctx.fillStyle = o.dot; ctx.beginPath(); ctx.arc(-w / 2 + 14, 0, 4, 0, 7); ctx.fill(); }
+    ctx.fillStyle = o.col || '#ffffff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, o.dot ? 8 : 0, 1);
+    ctx.restore();
+  }
+  function glowLine(ctx, a, c, b, prog, col1, col2, w = 3, dots = 0, t = 0) {
+    if (prog <= 0) return null;
+    const q = (u) => [(1 - u) * (1 - u) * a[0] + 2 * u * (1 - u) * c[0] + u * u * b[0], (1 - u) * (1 - u) * a[1] + 2 * u * (1 - u) * c[1] + u * u * b[1]];
+    const g = ctx.createLinearGradient(a[0], a[1], b[0], b[1]); g.addColorStop(0, col1); g.addColorStop(1, col2);
+    ctx.save(); ctx.strokeStyle = g; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.shadowColor = col2; ctx.shadowBlur = 14;
+    ctx.beginPath(); ctx.moveTo(a[0], a[1]); for (let i = 1; i <= 40; i++) { const p = q(prog * i / 40); ctx.lineTo(p[0], p[1]); } ctx.stroke();
+    const e = q(prog), e0 = q(Math.max(0, prog - 0.03)), ang = Math.atan2(e[1] - e0[1], e[0] - e0[0]);
+    ctx.translate(e[0], e[1]); ctx.rotate(ang); ctx.fillStyle = col2; ctx.beginPath(); ctx.moveTo(6, 0); ctx.lineTo(-8, -7); ctx.lineTo(-5, 0); ctx.lineTo(-8, 7); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    for (let i = 0; i < dots; i++) { const uu = ((t * 0.7 + i / dots) % 1) * prog; const p = q(uu); ctx.fillStyle = '#ffffff'; ctx.shadowColor = col2; ctx.shadowBlur = 10; ctx.beginPath(); ctx.arc(p[0], p[1], 3.2, 0, 7); ctx.fill(); ctx.shadowBlur = 0; }
+    return q;
+  }
+  function glassExplainer(ctx, W, H_, t) {
+    const ph = (a, b) => H.clamp((t - a) / (b - a));
+    const E = (a, b) => H.ease.inOut(ph(a, b));
+    const EO = (a, b) => H.ease.out(ph(a, b));
+    const typed = (str, a, b) => str.slice(0, Math.round(str.length * ph(a, b)));
+    // camera over the dashboard: [t, centreX, centreY, zoom]
+    const KF = [[0, 640, 360, 1], [1.7, 640, 360, 1], [2.8, 1300, 345, 1.35], [5.8, 1302, 345, 1.37], [6.8, 2238, 330, 1.3], [10.2, 2242, 330, 1.31], [11.1, 3060, 345, 1.35], [12.8, 3062, 345, 1.37], [13.8, 1800, 330, 0.37], [20, 1800, 330, 0.37]];
+    let k = 0; while (k < KF.length - 2 && t > KF[k + 1][0]) k++;
+    const A = KF[k], B = KF[k + 1], u = H.ease.inOut(H.clamp((t - A[0]) / (B[0] - A[0])));
+    const camX = H.lerp(A[1], B[1], u), camY = H.lerp(A[2], B[2], u), z = H.lerp(A[3], B[3], u);
+    const d = (p, a) => Math.sin(t * 0.5 + p) * a;
+
+    // ---------- background: blobs live in screen space but drift with a slow parallax of the camera ----------
+    const BG = H.layer(W, H_), b = BG.getContext('2d');
+    const base = b.createLinearGradient(0, 0, W, H_); base.addColorStop(0, '#0c0a24'); base.addColorStop(1, '#170f3a');
+    b.fillStyle = base; b.fillRect(0, 0, W, H_);
+    // blobs add light ('screen'), so overlaps go luminous instead of muddy; orange gets a hot coral mid-stop
+    const blob = (x, y, r, col, a = 1) => { const hot = col === '#ff7a1a', mid = hot ? '#ff5a4a' : col, tail = hot ? '#ff2b8a' : col; const g = b.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, H.rgba(col, a)); g.addColorStop(0.5, H.rgba(mid, a * 0.55)); g.addColorStop(1, H.rgba(tail, 0)); b.fillStyle = g; b.fillRect(x - r, y - r, r * 2, r * 2); };
+    const par = (wx) => 640 + (wx - camX) * 0.35 * Math.max(z, 0.6);
+    const BL = [[300, 170, '#7a2bff'], [900, 600, '#2b6bff'], [1400, 220, '#ff2bd6'], [1900, 620, '#00d1ff'], [2300, 200, '#ff7a1a'], [2800, 560, '#ff2bd6'], [3300, 220, '#7a2bff'], [3700, 600, '#ff7a1a'], [-200, 600, '#00d1ff']];
+    BL.forEach(([x, y, c], i) => blob(par(x) + d(i, 30), y + d(i + 2, 20), c === '#ff7a1a' ? 300 : i % 2 ? 330 : 380, c, 0.85));
+    // pools of dark negative space, like the hero (base colour re-asserted in the corners)
+    const pool = (x, y, r, a) => { const g = b.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, `rgba(12,10,36,${a})`); g.addColorStop(0.55, `rgba(12,10,36,${a * 0.6})`); g.addColorStop(1, 'rgba(12,10,36,0)'); b.fillStyle = g; b.fillRect(x - r, y - r, r * 2, r * 2); };
+    pool(0, H_, 520, 0.6); pool(W, 0, 420, 0.4);
+    const orb = (x, y, r, c1, c2, c3) => { const g = b.createRadialGradient(x - r * 0.4, y - r * 0.45, r * 0.05, x, y, r); g.addColorStop(0, c1); g.addColorStop(0.55, c2); g.addColorStop(1, c3); b.fillStyle = g; b.beginPath(); b.arc(x, y, r, 0, 7); b.fill(); };
+    orb(par(1650) + d(5, 10), 150, 90, '#ffd2f4', '#ff4fc1', '#6a1497');
+    orb(par(2700) + d(6, 10), 600, 70, '#c7f2ff', '#3aa0ff', '#1a2a8a');
+    orb(par(600), 560, 60, '#ffe3b8', '#ff8a2a', '#9a2f12');
+    b.strokeStyle = 'rgba(255,255,255,0.035)'; b.lineWidth = 1; b.beginPath();
+    const gx = (-(camX * z) % 48 + 48) % 48;
+    for (let x = gx; x <= W; x += 48 * z) { b.moveTo(x + 0.5, 0); b.lineTo(x + 0.5, H_); }
+    for (let y = 0; y <= H_; y += 48 * z) { b.moveTo(0, y + 0.5); b.lineTo(W, y + 0.5); }
+    b.stroke();
+    // dither the smooth gradients before the blur + saturate, which otherwise bands
+    b.globalAlpha = 0.05; b.fillStyle = noisePattern(b); b.fillRect(0, 0, W, H_); b.globalAlpha = 1;
+    ctx.drawImage(BG, 0, 0);
+    let SRC = blurOf(BG, W, H_, 26);
+
+    ctx.save();
+    ctx.translate(640, 360); ctx.scale(z, z); ctx.translate(-camX, -camY);
+    const panelIn = (t0) => EO(t0, t0 + 0.6);
+    const panel = (x, y, w, h, t0, title) => {
+      const e = panelIn(t0); if (e <= 0) return false;
+      ctx.save(); ctx.globalAlpha = e; glass(ctx, SRC, x, y + (1 - e) * 40, w, h, 28, { tint: 0.09 }); ctx.restore();
+      if (title) { ctx.save(); ctx.globalAlpha = EO(t0 + 0.2, t0 + 0.6); ctx.font = '600 21px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.78)'; ctx.fillText(title, x + 28, y + 44 + (1 - e) * 40); ctx.restore(); }
+      return true;
+    };
+    // ===== B: training data =====
+    const BX = 980, BY = 150, BW = 640, BH = 430;
+    if (panel(BX, BY, BW, BH, 2.2, 'TRAINING DATA')) {
+      const cnt = Math.floor(1e6 * Math.pow(EO(2.9, 5.7), 1.6));
+      ctx.font = '800 50px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText(cnt.toLocaleString('en-US'), BX + 26, BY + 104);
+      const nw = ctx.measureText(cnt.toLocaleString('en-US')).width;
+      ctx.font = '600 22px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.8)'; ctx.fillText('examples', BX + 36 + nw, BY + 102);
+      const pr = ph(2.9, 5.7);
+      ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.beginPath(); ctx.roundRect(BX + 28, BY + 116, BW - 56, 6, 3); ctx.fill();
+      const pg = ctx.createLinearGradient(BX + 28, 0, BX + BW - 28, 0); pg.addColorStop(0, '#7a2bff'); pg.addColorStop(1, '#ff4fc1');
+      ctx.fillStyle = pg; ctx.beginPath(); ctx.roundRect(BX + 28, BY + 116, (BW - 56) * Math.pow(pr, 1.6), 6, 3); ctx.fill();
+      // grid of labelled example tiles that keeps refilling (scrolls upward like a live feed)
+      const scroll = Math.max(0, t - 2.6) * 60;
+      ctx.save(); ctx.beginPath(); ctx.roundRect(BX + 20, BY + 140, BW - 40, BH - 160, 16); ctx.clip();
+      for (let i = 0; i < 16; i++) {
+        const col = i % 4, row = Math.floor(i / 4);
+        const tx = BX + 30 + col * 146, ty = BY + 150 + row * 128 - (scroll % 128);
+        const idx = i + Math.floor(scroll / 128) * 4;
+        const appear = 2.5 + (idx % 15) * 0.05 + Math.floor(idx / 15) * 0;
+        const e = EO(appear, appear + 0.3); if (e <= 0) continue;
+        const kind = (idx * 7 + 3) % 5 < 2 ? 'dog' : 'cat';
+        ctx.save(); ctx.globalAlpha = e;
+        ctx.fillStyle = 'rgba(255,255,255,0.10)'; ctx.beginPath(); ctx.roundRect(tx, ty, 134, 116, 18); ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.roundRect(tx + 0.5, ty + 0.5, 133, 115, 18); ctx.stroke();
+        petIcon(ctx, kind, tx + 67, ty + 44, 22, '#ffffff', 2.5);
+        chipPill(ctx, tx + 67, ty + 92, kind, { font: '600 21px "Inter"', h: 32, bg: 'rgba(255,255,255,0.26)', dot: kind === 'cat' ? '#7ad7ff' : '#ffb35c' });
+        ctx.restore();
+      }
+      ctx.restore();
+    }
+    // ===== C: model (network card) =====
+    const CX = 1800, CY = 160, CW = 420, CH = 400;
+    const adj = E(8.6, 9.3);
+    const showC = panel(CX, CY, CW, CH, 4.2, 'MODEL');
+    const NODES = [];
+    for (let c = 0; c < 3; c++) for (let r = 0; r < (c === 1 ? 4 : 3); r++) NODES.push([CX + 80 + c * 130, CY + (c === 1 ? 110 : 140) + r * (c === 1 ? 70 : 85), c]);
+    const wgt = (i, j) => { const a = Math.abs(Math.sin(i * 3.1 + j * 1.7)), b2 = Math.abs(Math.cos(i * 2.3 + j * 0.9)); return H.lerp(a, b2, adj); };
+    const err = ph(8.0, 8.4) * (1 - ph(9.2, 9.6));
+    if (showC) {
+      const pulse = (c) => Math.max(0, Math.sin((t * 6) - c * 1.4)) * ((t > 6.8 && t < 7.2) || (t > 9.3 && t < 9.7) ? 1 : 0);
+      for (let i = 0; i < NODES.length; i++) for (let j = 0; j < NODES.length; j++) {
+        if (NODES[j][2] !== NODES[i][2] + 1) continue;
+        const w = wgt(i, j);
+        const col = H.mix(H.mix([122, 215, 255], [255, 79, 193], w), [255, 90, 90], err);
+        ctx.strokeStyle = H.rgba(col, 0.25 + 0.65 * w); ctx.lineWidth = 0.8 + 3.2 * w;
+        ctx.beginPath(); ctx.moveTo(NODES[i][0], NODES[i][1]); ctx.lineTo(NODES[j][0], NODES[j][1]); ctx.stroke();
+      }
+      for (const [x, y, c] of NODES) {
+        const g = ctx.createRadialGradient(x - 4, y - 5, 1, x, y, 15); g.addColorStop(0, '#ffffff'); g.addColorStop(0.5, H.rgba(H.mix([255, 120, 220], [255, 230, 140], pulse(c)))); g.addColorStop(1, '#7a2bff');
+        ctx.save(); ctx.shadowColor = '#ff4fc1'; ctx.shadowBlur = 12 + 14 * pulse(c); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 13, 0, 7); ctx.fill(); ctx.restore();
+      }
+      ctx.font = '600 21px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.78)'; ctx.fillText('weights', CX + CW - 112, CY + 44);
+    }
+    // ===== D: output chat card =====
+    const DX = 2290, DY = 190, DW = 380, DH = 320;
+    const wrong = t > 7.05 && t < 9.4, right = t >= 9.4;
+    const shake = t > 7.4 && t < 7.8 ? Math.sin(t * 80) * 6 : 0;
+    if (panel(DX + shake, DY, DW, DH, 6.5, 'OUTPUT')) {
+      // test picture
+      ctx.fillStyle = 'rgba(255,255,255,0.10)'; ctx.beginPath(); ctx.roundRect(DX + 28 + shake, DY + 64, 120, 110, 18); ctx.fill();
+      petIcon(ctx, 'cat', DX + 88 + shake, DY + 124, 28, '#ffffff', 2.5);
+      if (t > 6.9 && t < 7.05) chipPill(ctx, DX + 270, DY + 110, '• • •', { bg: 'rgba(255,255,255,0.12)', font: '800 20px "Inter"', h: 34 });
+      if (wrong || right) {
+        const k2 = EO(right ? 9.4 : 7.05, (right ? 9.4 : 7.05) + 0.3);
+        ctx.save(); ctx.globalAlpha = k2;
+        const gx2 = DX + 170 + shake, gy2 = DY + 82;
+        const ug = ctx.createLinearGradient(gx2, gy2, gx2 + 180, gy2 + 56);
+        if (right) { ug.addColorStop(0, '#1fbf8f'); ug.addColorStop(1, '#4dffa6'); } else { ug.addColorStop(0, '#8a5bff'); ug.addColorStop(1, '#ff4fc1'); }
+        ctx.fillStyle = ug; ctx.beginPath(); ctx.roundRect(gx2, gy2, 180, 60, [20, 20, 20, 4]); ctx.fill();
+        ctx.font = '800 36px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText(right ? 'cat' : 'dog?', gx2 + 18, gy2 + 43);
+        ctx.restore();
+        // verdict badge
+        const vk = H.ease.back(ph(right ? 9.45 : 7.4, (right ? 9.45 : 7.4) + 0.3));
+        if (vk > 0) {
+          ctx.save(); ctx.translate(gx2 + 150, gy2 + 30); ctx.scale(vk, vk);
+          ctx.shadowColor = right ? '#4dffa6' : '#ff3b5c'; ctx.shadowBlur = 18; ctx.fillStyle = right ? '#4dffa6' : '#ff3b5c'; ctx.beginPath(); ctx.arc(0, 0, 17, 0, 7); ctx.fill(); ctx.shadowBlur = 0;
+          ctx.strokeStyle = '#fff'; ctx.lineWidth = 3.5; ctx.lineCap = 'round'; ctx.beginPath();
+          if (right) { ctx.moveTo(-7, 0); ctx.lineTo(-2, 6); ctx.lineTo(8, -6); } else { ctx.moveTo(-6, -6); ctx.lineTo(6, 6); ctx.moveTo(6, -6); ctx.lineTo(-6, 6); }
+          ctx.stroke(); ctx.restore();
+        }
+      }
+      if (t > 7.6 && t < 9.5) { ctx.save(); ctx.globalAlpha = EO(7.6, 7.9) * (1 - ph(9.3, 9.5)); ctx.font = '600 22px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.fillText('Answer:', DX + 30, DY + 226); chipPill(ctx, DX + 176, DY + 219, 'cat', { dot: '#7ad7ff', font: '700 22px "Inter"', h: 36, bg: 'rgba(255,255,255,0.24)' }); ctx.restore(); }
+      ctx.font = '400 16px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      ctx.fillText(typed(right ? 'Weights updated · try #2' : wrong ? 'Prediction 1 of many' : '', right ? 9.5 : 7.1, right ? 9.9 : 7.5), DX + 30, DY + 280);
+      // emphasis on the wrong guess: red glow ring
+      if (wrong && t > 7.4) { ctx.save(); ctx.strokeStyle = '#ff3b5c'; ctx.shadowColor = '#ff3b5c'; ctx.shadowBlur = 20; ctx.lineWidth = 3; ctx.globalAlpha = 0.55 + 0.45 * Math.sin(t * 10); const pr = EO(7.4, 7.8); ctx.beginPath(); ctx.roundRect(DX + 160 - 10 * (1 - pr), DY + 72 - 10 * (1 - pr), 200 + 20 * (1 - pr), 80 + 20 * (1 - pr), 26); ctx.stroke(); ctx.restore(); }
+    }
+    // ===== E: accuracy chart =====
+    const EX = 2780, EY = 150, EW = 560, EH = 430;
+    const ACCS = [61, 72, 80, 86, 90, 93, 95, 97];
+    if (panel(EX, EY, EW, EH, 10.4, 'ACCURACY')) {
+      const cp = H.ease.inOut(ph(10.9, 12.6));
+      const cur = Math.round(H.lerp(61, 97, cp));
+      const big = t > 12.6 ? 1 + 0.12 * Math.sin(Math.min(1, (t - 12.6) / 0.35) * Math.PI) : 1;
+      ctx.save(); ctx.translate(EX + 28, EY + 110); ctx.scale(big, big);
+      const ng = ctx.createLinearGradient(0, -60, 220, 0); ng.addColorStop(0, '#ffffff'); ng.addColorStop(1, cur >= 97 ? '#4dffa6' : '#ffc6f0');
+      ctx.font = '800 72px "Inter"'; ctx.fillStyle = ng; if (cur >= 97) { ctx.shadowColor = '#4dffa6'; ctx.shadowBlur = 24 * (1 - ph(13.2, 14)); } ctx.fillText(cur + '%', 0, 0); ctx.restore();
+      ctx.font = '600 21px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.78)'; ctx.fillText('round 1: 61%', EX + 300, EY + 104);
+      // axes + line chart
+      const gx0 = EX + 40, gx1 = EX + EW - 40, gy0 = EY + EH - 50, gy1 = EY + 150;
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 1;
+      for (let i = 0; i <= 4; i++) { const y = H.lerp(gy0, gy1, i / 4); ctx.beginPath(); ctx.moveTo(gx0, y); ctx.lineTo(gx1, y); ctx.stroke(); }
+      const pts = ACCS.map((a, i) => [H.lerp(gx0, gx1, i / 7), H.lerp(gy0, gy1, (a - 50) / 50)]);
+      const n = cp * 7, m = Math.floor(n), f = n - m;
+      const vis = pts.slice(0, m + 1); if (m < 7) vis.push([H.lerp(pts[m][0], pts[m + 1][0], f), H.lerp(pts[m][1], pts[m + 1][1], f)]);
+      if (t > 10.9) {
+        const ag = ctx.createLinearGradient(0, gy1, 0, gy0); ag.addColorStop(0, 'rgba(77,255,166,0.35)'); ag.addColorStop(1, 'rgba(77,255,166,0)');
+        ctx.fillStyle = ag; ctx.beginPath(); ctx.moveTo(vis[0][0], gy0); vis.forEach(p => ctx.lineTo(p[0], p[1])); ctx.lineTo(vis[vis.length - 1][0], gy0); ctx.closePath(); ctx.fill();
+        ctx.save(); ctx.strokeStyle = '#4dffa6'; ctx.shadowColor = '#4dffa6'; ctx.shadowBlur = 12; ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.beginPath(); vis.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.stroke(); ctx.restore();
+        vis.forEach((p, i) => { if (i <= m) { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(p[0], p[1], 4, 0, 7); ctx.fill(); } });
+        const lp = vis[vis.length - 1]; ctx.save(); ctx.shadowColor = '#4dffa6'; ctx.shadowBlur = 16; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(lp[0], lp[1], 7, 0, 7); ctx.fill(); ctx.restore();
+        if (t > 12.6) { ctx.save(); ctx.strokeStyle = '#4dffa6'; ctx.globalAlpha = 1 - ph(12.6, 13.4); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(lp[0], lp[1], 10 + 40 * EO(12.6, 13.4), 0, 7); ctx.stroke(); ctx.restore(); }
+        ctx.font = '600 18px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.fillText('training rounds →', gx1 - 168, gy0 + 32);
+        ctx.fillText('61%', gx0 - 6, pts[0][1] + 26);
+      }
+    }
+    // ---------- connectors that draw on ----------
+    if (t > 4.4) glowLine(ctx, [BX + BW - 10, BY + 230], [1720, 140], [CX + 30, CY + 150], E(4.4, 5.2), '#7a2bff', '#ff4fc1', 3, t < 7 ? 4 : 0, t);
+    if (t > 4.9 && t < 7.0) chipPill(ctx, 1685, 175, 'into the model', { k: EO(4.9, 5.2) * (1 - ph(6.7, 7.0)), grad: ['#8a5bff', '#ff4fc1'], font: '700 19px "Inter"', h: 36 });
+    if (t > 6.8) {
+      const fade = 1 - ph(10.3, 10.7);
+      ctx.save(); ctx.globalAlpha = Math.max(0.0, fade);
+      glowLine(ctx, [CX + CW - 30, CY + 90], [2250, 70], [DX + 24, DY + 26], E(6.85, 7.2), '#7ad7ff', '#ffffff', 3);
+      chipPill(ctx, 2250, 112, '1  Guess', { k: EO(6.95, 7.25), font: '800 22px "Inter"', h: 40, bg: 'rgba(255,255,255,0.22)' });
+      if (t > 7.45) chipPill(ctx, DX + DW - 60, DY - 22, '2  Check', { k: EO(7.45, 7.75), font: '800 22px "Inter"', h: 40, bg: 'rgba(255,255,255,0.22)' });
+      if (t > 8.0) {
+        const q = glowLine(ctx, [DX + 120, DY + DH - 10], [2250, 590], [CX + CW - 60, CY + CH - 30], E(8.0, 8.6), '#ff7a1a', '#ff3b5c', 3.5);
+        if (q && t < 8.8) { const p = q(E(8.0, 8.6)); ctx.save(); ctx.fillStyle = '#fff'; ctx.shadowColor = '#ff3b5c'; ctx.shadowBlur = 24; ctx.beginPath(); ctx.arc(p[0], p[1], 7, 0, 7); ctx.fill(); ctx.restore(); }
+        chipPill(ctx, 2240, 562, '3  Adjust', { k: EO(8.5, 8.8), grad: ['#ff7a1a', '#ff3b5c'], glow: 'rgba(255,60,90,0.5)', font: '800 22px "Inter"', h: 40 });
+        if (t < 9.4) chipPill(ctx, 2250, 510, 'error signal', { k: EO(8.1, 8.35) * (1 - ph(9.1, 9.4)), bg: 'rgba(255,59,92,0.38)', font: '700 21px "Inter"', h: 34 });
+      }
+      if (right) chipPill(ctx, DX + DW - 70, DY - 22, 'Guess again ✓', { k: EO(9.5, 9.8), grad: ['#1fbf8f', '#4dffa6'], glow: 'rgba(77,255,166,0.5)', font: '800 22px "Inter"', h: 40 });
+      ctx.restore();
+    }
+    ctx.restore(); // world
+
+    // ---------- glass over glass: hook card → header pill, takeaway (re-blur the frame) ----------
+    SRC = blurOf(ctx.canvas, W, H_, 20);
+    {
+      const sh = E(1.5, 2.4), a = EO(0.1, 0.6);
+      const w = H.lerp(760, 310, sh), h = H.lerp(190, 58, sh), x = H.lerp(640 - 380, 40, sh), y = H.lerp(250, 32, sh) + (1 - a) * 30;
+      ctx.save(); ctx.globalAlpha = a; glass(ctx, SRC, x, y, w, h, H.lerp(36, 25, sh), { shadow: H.lerp(50, 20, sh), tint: 0.1 });
+      const fs = H.lerp(60, 28, sh);
+      ctx.font = `800 ${fs}px "Inter"`; ctx.textBaseline = 'middle';
+      const tw = ctx.measureText('How does AI learn?').width;
+      const hg = ctx.createLinearGradient(x, 0, x + w, 0); hg.addColorStop(0, '#ffffff'); hg.addColorStop(1, '#ffc6f0');
+      ctx.fillStyle = hg; ctx.fillText('How does AI learn?', x + (w - tw) / 2, y + h / 2 + 2);
+      if (sh < 0.5) { ctx.globalAlpha = a * (1 - sh * 2) * EO(0.5, 0.9); chipPill(ctx, 640, y - 24, 'NEW SERIES · AI BASICS', { font: '600 12px "Inter"', dot: '#b7f5ff' }); }
+      ctx.restore();
+    }
+    if (t > 13.0) {
+      const e = EO(13.0, 13.5);
+      const w = 900, h = 100, x = 640 - w / 2, y = 572 + (1 - e) * 30;
+      ctx.save(); ctx.globalAlpha = e; glass(ctx, SRC, x, y, w, h, 42, { shadow: 40, tint: 0.12 });
+      ctx.font = '800 46px "Inter"'; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
+      const hg = ctx.createLinearGradient(x, 0, x + w, 0); hg.addColorStop(0, '#ffffff'); hg.addColorStop(1, '#ffc6f0');
+      ctx.fillStyle = hg; ctx.fillText('More examples → better guesses', 640, y + h / 2 + 2);
+      ctx.restore();
+    }
+  }
+
+  // ---------- sound: frosted-glass dashboard (soft glass taps, airy panel slides, gentle chimes, a calm pad) ----------
+  function glassSound(k) {
+    const D = 14.5;
+    const ph = (t, a, b) => H.clamp((t - a) / (b - a));
+    const inv = (u) => (u < 0.5 ? Math.cbrt(u / 4) : 1 - Math.cbrt((1 - u) * 2) / 2); // inverse of H.ease.inOut
+    // camera keyframes copied from glassExplainer (KF): pan a sound to where its panel sits on screen
+    const KF = [[0, 640, 360, 1], [1.7, 640, 360, 1], [2.8, 1300, 345, 1.35], [5.8, 1302, 345, 1.37], [6.8, 2238, 330, 1.3], [10.2, 2242, 330, 1.31], [11.1, 3060, 345, 1.35], [12.8, 3062, 345, 1.37], [13.8, 1800, 330, 0.37], [20, 1800, 330, 0.37]];
+    const pan = (wx, t) => { let i = 0; while (i < KF.length - 2 && t > KF[i + 1][0]) i++; const A = KF[i], B = KF[i + 1], u = H.ease.inOut(H.clamp((t - A[0]) / (B[0] - A[0]))); return H.clamp(((wx - H.lerp(A[1], B[1], u)) * H.lerp(A[3], B[3], u)) / 640, -1, 1) * 0.6; };
+    const busy = [];
+    // glass tap: a light fingertip click on a glass pane (tiny click + a short, soft glassy ring, kept under ~2 kHz)
+    const tap = (t, f, g, p = 0, minor = true) => { busy.push(t); k.play('click', t, { f: f * 1.3, gain: 0.45 * g, pan: p, minor }); k.tone(t, { f, dur: 0.16, gain: 0.07 * g, a: 0.002, pan: p, verb: 0.25, minor }); k.tone(t, { f: f * 1.5, dur: 0.08, gain: 0.025 * g, a: 0.002, pan: p, minor }); };
+    // soft chime: rounded sine with an octave shimmer and room
+    const chime = (t, n, g, p = 0, dur = 1.2, minor) => { const f = k.hz(n); busy.push(t); k.tone(t, { f, dur, gain: 0.1 * g, a: 0.004, pan: p, verb: 0.4, minor }); k.tone(t, { f: f * 2, dur: dur * 0.45, gain: 0.025 * g, a: 0.003, pan: p, verb: 0.4, minor }); };
+    // a frosted panel glides up into place (EO over 0.6 s): an airy breath that settles with a tap
+    const frost = (t0, p, g = 1) => { k.noise(t0, { dur: 0.6, color: 'pink', filter: 'bandpass', f: [[0, 700], [0.35, 1500], [0.6, 1100]], q: 0.8, gain: 0.06 * g, a: 0.12, pan: p, verb: 0.2 }); tap(t0 + 0.28, 880, 0.7 * g, p); };
+    // glowing connector draws on: a soft, rising shimmer that follows the eased line
+    const glow = (t0, t1, f0, f1, g, p) => { const d = t1 - t0; k.noise(t0, { dur: d + 0.1, color: 'pink', filter: 'bandpass', f: [[0, f0], [d, f1]], q: 4, gain: 0.05 * g, a: d * 0.5, pan: p, verb: 0.3, minor: true }); k.tone(t0, { f: [[0, f0 / 2], [d, f1 / 2]], type: 'sine', dur: d + 0.1, gain: 0.025 * g, a: d * 0.5, pan: p, minor: true }); };
+    const glide = (t0, t1, g = 1) => { const d = t1 - t0; k.noise(t0, { dur: d + 0.15, color: 'pink', filter: 'bandpass', f: [[0, 240], [d * 0.5, 560], [d, 260]], q: 0.7, gain: 0.04 * g, a: d * 0.5, verb: 0.15 }); };
+    const counter = (a, b, val, f, g, p, minGap) => {
+      let last = -1, lastV = val(a); const top = Math.abs(val(b) - val(a)) / (b - a) * 0.22;
+      for (let t = a; t <= b + 1e-6; t += 1 / 120) {
+        const v = val(t); if (v === lastV) continue; lastV = v;
+        const speed = Math.abs(val(Math.min(b, t + 0.05)) - val(Math.max(a, t - 0.05)));
+        const gap = H.clamp(minGap / Math.max(0.2, Math.min(1, speed / top)), minGap, 0.4);
+        if (t - last >= gap && !busy.some((x) => t > x - 0.03 && t < x + 0.09)) { k.play('tick', t, { f, gain: g, pan: p, minor: true }); last = t; }
+      }
+    };
+
+    k.bed('room', 0, D, { gain: 0.18 });
+    k.music('pad', 0, D, { bpm: 92, gain: 0.34, chords: [['A3', 'C4', 'E4', 'G4'], ['F3', 'A3', 'C4', 'E4'], ['C4', 'E4', 'G4', 'B4'], ['G3', 'B3', 'D4', 'F#4'], ['F3', 'A3', 'C4', 'E4'], ['C4', 'E4', 'G4', 'C5']] });
+
+    // ---- hook: the glass title card fades up (EO 0.1-0.6), its series pill (0.5-0.9), then slides to the header
+    k.noise(0.05, { dur: 0.7, color: 'pink', filter: 'bandpass', f: [[0, 600], [0.5, 1400]], q: 0.8, gain: 0.05, a: 0.3, verb: 0.3 });
+    chime(0.18, 'E5', 1, 0, 1.6); chime(0.18, 'A4', 0.7, 0, 1.6);
+    tap(0.6, 1100, 0.5, 0);
+    k.noise(1.5, { dur: 0.9, color: 'pink', filter: 'lowpass', f: [[0, 800], [0.9, 350]], gain: 0.045, a: 0.35, minor: true }); // card glides to the corner
+    glide(1.7, 2.8);
+
+    // ---- beat 2: TRAINING DATA panel, tiles fade in, counter + progress bar
+    frost(2.2, pan(1300, 2.4));
+    for (let i = 0; i < 15; i += 2) tap(2.5 + i * 0.05 + 0.04, 980 + (i % 4) * 70, 0.35, pan(1010 + (i % 4) * 146, 2.6)); // tiles appear in a ripple
+    counter(2.95, 5.66, (t) => Math.floor(1e6 * Math.pow(H.ease.out(ph(t, 2.9, 5.7)), 1.6)), 3000, 1.0, pan(1100, 4), 1 / 9);
+    frost(4.2, pan(2010, 4.4)); // MODEL card
+    glow(4.4, 5.2, 600, 1500, 1, pan(1720, 4.8)); // data -> model connector
+    tap(4.95, 1050, 0.8, pan(1715, 5.0), false); // "into the model"
+    chime(5.7, 'E5', 0.8, pan(1100, 5.7)); tap(5.7, 1300, 0.6, pan(1100, 5.7)); // 1,000,000 + progress bar full
+
+    // ---- beat 3: guess, check, adjust
+    glide(5.8, 6.8);
+    frost(6.5, pan(2480, 6.7)); // OUTPUT card
+    k.tone(6.8, { f: [[0, 330], [0.4, 660]], type: 'sine', dur: 0.42, gain: 0.04, a: 0.15, pan: pan(2010, 6.9), minor: true }); // network lights up
+    glow(6.85, 7.2, 900, 1700, 0.8, pan(2250, 7.0)); // Guess line
+    tap(6.92, 820, 0.4, pan(2560, 6.92)); // typing dots
+    tap(7.0, 1200, 0.8, pan(2250, 7.0)); // "1 Guess"
+    chime(7.06, 'G4', 0.7, pan(2550, 7.1), 0.35); // "dog?" message lands (short, so the typing reads)
+    for (let i = 0; i < 6; i++) k.play('key', 7.14 + i * 0.065, { gain: 0.4, pan: pan(2400, 7.3), minor: true }); // "Prediction 1 of many" types out (7.1-7.5)
+    k.play('error', 7.4, { f: 'A3', gain: 0.7, pan: pan(2600, 7.4) });
+    k.tone(7.4, { f: [[0, 160], [0.2, 90]], dur: 0.3, gain: 0.18, pan: pan(2600, 7.4) }); // panel judders
+    tap(7.63, 900, 0.9, pan(2400, 7.65)); // Answer: cat
+    // ADJUST: the red error line draws back (E 8.0-8.6) with a hot dot riding it; weights re-balance (8.6-9.3)
+    glow(8.0, 8.6, 1400, 600, 1.2, pan(2250, 8.3));
+    k.tone(8.0, { f: [[0, 520], [0.6, 260]], type: 'triangle', dur: 0.62, gain: 0.045, a: 0.3, pan: pan(2250, 8.3) });
+    tap(8.12, 760, 0.6, pan(2250, 8.2)); // "error signal"
+    tap(8.52, 900, 0.8, pan(2240, 8.6), false); // "3 Adjust"
+    k.noise(8.6, { dur: 0.75, color: 'pink', filter: 'bandpass', f: [[0, 500], [0.4, 1300], [0.75, 900]], q: 3, gain: 0.05, a: 0.3, pan: pan(2010, 9), verb: 0.3, minor: true }); // weights shimmer as they rebalance
+    // CORRECT: green "cat" (9.4), check badge (9.45), typing, Guess again
+    ['C5', 'E5', 'G5'].forEach((n, i) => chime(9.4 + i * 0.07, n, 0.75 - i * 0.12, pan(2600, 9.45), 0.6));
+    for (let i = 0; i < 6; i++) k.play('key', 9.55 + i * 0.065, { gain: 0.5, pan: pan(2400, 9.7), minor: true });
+
+    // ---- beat 4: ACCURACY panel, the line chart draws point by point
+    glide(10.2, 11.1);
+    frost(10.4, pan(3060, 10.6));
+    ['A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5'].forEach((n, i) => chime(10.9 + 1.7 * inv((i + 1) / 7), n, 0.45, pan(2820 + (i + 1) * 69, 11 + i * 0.2), 0.7, true)); // each point lands
+    k.noise(10.9, { dur: 1.7, color: 'pink', filter: 'bandpass', f: [[0, 700], [1.7, 1600]], q: 5, gain: 0.025, a: 0.8, pan: pan(3060, 11.8), minor: true }); // the glowing line drawing
+    counter(10.95, 12.56, (t) => Math.round(H.lerp(61, 97, H.ease.inOut(ph(t, 10.9, 12.6)))), 2600, 0.9, pan(2900, 12), 1 / 10);
+    // 97% (the biggest hit): number glows green and swells, a ring pulses off the last point
+    k.play('thud', 12.6, { f: 90, gain: 0.6 });
+    k.noise(12.6, { dur: 1.0, color: 'pink', filter: 'lowpass', f: [[0, 2200], [0.9, 400]], gain: 0.16, verb: 0.4 });
+    ['A4', 'C5', 'E5', 'A5'].forEach((n, i) => chime(12.6 + i * 0.03, n, 1.3 - i * 0.15, (i - 1.5) * 0.25, 1.8));
+    glide(12.8, 13.8, 0.9);
+    // takeaway glass bar (EO 13.0-13.5) settles and resolves
+    frost(12.95, 0, 0.7);
+    ['E5', 'A5'].forEach((n, i) => chime(13.35 + i * 0.09, n, 0.6 - i * 0.12, (i - 0.5) * 0.3, 1.4));
+    k.tone(13.35, { f: 'A2', type: 'triangle', dur: 1.2, gain: 0.12, a: 0.02 });
+  }
+
+  registerStyle({
+    id: 'glassmorphism',
+    name: 'Glassmorphism UI',
+    category: 'Dimensional',
+    description: 'Frosted-glass UI: translucent panels that genuinely blur the vivid gradient blobs and orbs behind them, with 1px light borders, a diagonal specular sheen, fine frost grain and crisp Inter type.',
+    motion: 'Color blobs bloom up under the glass, the frosted card rises in, then the chat plays out (user bubble pops, the AI reply types itself line by line) while stat chips float in glass-over-glass and their ring and sparkline draw on; blobs keep drifting so the frost shimmers.',
+    duration: 5,
+    fonts: ['800 60px "Inter"', '700 20px "Inter"', '600 18px "Inter"', '600 15px "Inter"', '400 15px "Inter"', '400 18px "Inter"', '800 22px "Inter"', '600 12px "Inter"'],
+    frameT: 4.6,
+    readsPixels: false,
+    explainerDuration: 14.5,
+    explainerNote: 'The camera glides and zooms across one big frosted dashboard (data feed → network card → output chat → accuracy chart → pull back) while the live colour blobs drift behind, so every panel re-frosts as it moves; connectors are glowing gradient lines with travelling light dots, labels are glass pills, numbers count in big Inter 800.',
+    explainer: glassExplainer,
+    explainerSound: glassSound,
+    draw(ctx, W, H_, t) {
+      // ---------- background: vivid blobs + a few crisp orbs (so the frost has something to blur) ----------
+      const BG = H.layer(W, H_), b = BG.getContext('2d');
+      const base = b.createLinearGradient(0, 0, W, H_);
+      base.addColorStop(0, '#0c0a24'); base.addColorStop(1, '#170f3a');
+      b.fillStyle = base; b.fillRect(0, 0, W, H_);
+      const blob = (x, y, r, col, a = 1) => {
+        const g = b.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, H.rgba(col, a)); g.addColorStop(0.5, H.rgba(col, a * 0.55)); g.addColorStop(1, H.rgba(col, 0));
+        b.fillStyle = g; b.fillRect(x - r, y - r, r * 2, r * 2);
+      };
+      const d = (ph, a) => Math.sin(t * 0.5 + ph) * a;
+      const ph = (a, b2) => H.clamp((t - a) / (b2 - a));
+      const E = (a, b2) => H.ease.out(ph(a, b2));
+      const typed = (str, a, b2) => str.slice(0, Math.round(str.length * ph(a, b2)));
+      const bloom = (i) => 0.35 + 0.65 * H.ease.out(ph(i * 0.12, 0.9 + i * 0.12));
+      blob(930 + d(0, 30), 230 + d(1, 20), 330 * bloom(0), '#ff2bd6', 0.95 * bloom(0));
+      blob(1180 + d(2, 20), 600, 300 * bloom(1), '#ff7a1a', 0.95 * bloom(1));
+      blob(620, 640 + d(3, 20), 320 * bloom(2), '#2b6bff', 0.9 * bloom(2));
+      blob(260 + d(4, 30), 170, 330 * bloom(3), '#7a2bff', 0.85 * bloom(3));
+      blob(120, 640, 250, '#00d1ff', 0.6);
+      blob(760, 380, 200, '#ff4d6d', 0.5);
+      // crisp orbs
+      orb(b, 1090 + d(5, 10), 170, 118, '#ffd2f4', '#ff4fc1', '#6a1497');
+      orb(b, 585, 575 + d(6, 8), 86, '#c7f2ff', '#3aa0ff', '#1a2a8a');
+      orb(b, 1215, 520, 46, '#ffe3b8', '#ff8a2a', '#9a2f12');
+      // ring
+      b.save(); b.translate(780, 120); b.rotate(-0.4);
+      const rg = b.createLinearGradient(-90, 0, 90, 0); rg.addColorStop(0, '#7af0ff'); rg.addColorStop(1, '#8a5bff');
+      b.strokeStyle = rg; b.lineWidth = 22; b.beginPath(); b.ellipse(0, 0, 92, 40, 0, 0, 7); b.stroke(); b.restore();
+      // faint grid
+      b.strokeStyle = 'rgba(255,255,255,0.035)'; b.lineWidth = 1; b.beginPath();
+      for (let x = 0; x <= W; x += 48) { b.moveTo(x + 0.5, 0); b.lineTo(x + 0.5, H_); }
+      for (let y = 0; y <= H_; y += 48) { b.moveTo(0, y + 0.5); b.lineTo(W, y + 0.5); }
+      b.stroke();
+      ctx.drawImage(BG, 0, 0);
+      let SRC = blurOf(BG, W, H_, 26);
+
+      // ---------- left: headline ----------
+      ctx.save(); ctx.globalAlpha = E(0.35, 0.7);
+      glass(ctx, SRC, 80 - (1 - E(0.35, 0.8)) * 20, 196, 196, 34, 17, { shadow: 16, tint: 0.08 });
+      ctx.fillStyle = '#b7f5ff'; ctx.beginPath(); ctx.arc(100, 213, 4 * (0.7 + 0.3 * Math.sin(t * 4)), 0, 7); ctx.fill();
+      ctx.font = '600 12px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fillText('NEW  ·  AI COPILOT 2.0', 114, 217.5);
+      ctx.restore();
+      // headline lines rise out of a mask, staggered
+      const line = (str, y, a, fill, font) => {
+        const e = E(a, a + 0.55); if (e <= 0) return;
+        ctx.save(); ctx.beginPath(); ctx.rect(60, y - 62, 520, 76); ctx.clip();
+        ctx.globalAlpha = e; ctx.font = font; ctx.fillStyle = fill; ctx.fillText(str, 76, y + (1 - e) * 64); ctx.restore();
+      };
+      line('Your AI', 300, 0.5, '#ffffff', '800 60px "Inter"');
+      line('copilot,', 366, 0.62, '#ffffff', '800 60px "Inter"');
+      const hg = ctx.createLinearGradient(76, 0, 400, 0); hg.addColorStop(0, '#ffffff'); hg.addColorStop(1, '#ffc6f0');
+      line('always on.', 432, 0.74, hg, '800 60px "Inter"');
+      ctx.save(); ctx.globalAlpha = E(1.05, 1.5); ctx.font = '400 18px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.68)';
+      ctx.fillText('Answers, summaries and actions —', 78, 478 + (1 - E(1.05, 1.5)) * 10); ctx.fillText('right where you work.', 78, 504 + (1 - E(1.05, 1.5)) * 10);
+      ctx.restore();
+
+      // ---------- chat card (rises in, frosted) ----------
+      const ce = E(0.55, 1.25);
+      const cx = 650, cy = 96 + (1 - ce) * 50, cw = 470, ch = 520;
+      ctx.save(); ctx.globalAlpha = ce;
+      glass(ctx, SRC, cx, cy, cw, ch, 28, { tint: 0.09 });
+      ctx.restore();
+      // header
+      ctx.save(); ctx.globalAlpha = E(1.0, 1.35);
+      orb(ctx, cx + 44, cy + 46, 20, '#ffd6f5', '#ff4fc1', '#7a1fb0');
+      ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 1.8; ctx.beginPath();
+      const sx = cx + 44, sy = cy + 46; ctx.moveTo(sx, sy - 8); ctx.quadraticCurveTo(sx, sy, sx + 8, sy); ctx.quadraticCurveTo(sx, sy, sx, sy + 8); ctx.quadraticCurveTo(sx, sy, sx - 8, sy); ctx.quadraticCurveTo(sx, sy, sx, sy - 8); ctx.stroke();
+      ctx.font = '600 15px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText('Nova', cx + 76, cy + 42);
+      ctx.fillStyle = '#4dffa6'; ctx.beginPath(); ctx.arc(cx + 80, cy + 58, 3.5, 0, 7); ctx.fill();
+      ctx.font = '400 12px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.fillText('AI assistant · online', cx + 89, cy + 62);
+      for (let i = 0; i < 3; i++) { ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.beginPath(); ctx.arc(cx + cw - 54 + i * 8, cy + 46, 2, 0, 7); ctx.fill(); }
+      ctx.restore();
+      const dl = E(1.1, 1.6);
+      if (dl > 0) { ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx + 24, cy + 88.5); ctx.lineTo(cx + 24 + (cw - 48) * dl, cy + 88.5); ctx.stroke(); }
+      // user message pops from its tail corner
+      {
+        const bw = 262, bx = cx + cw - 24 - bw, by = cy + 112;
+        const k = H.ease.back(ph(1.45, 1.85));
+        if (k > 0) {
+          ctx.save(); ctx.translate(bx + bw, by + 46); ctx.scale(k, k); ctx.translate(-(bx + bw), -(by + 46)); ctx.globalAlpha = Math.min(1, ph(1.45, 1.6));
+          const ug = ctx.createLinearGradient(bx, by, bx + bw, by + 46);
+          ug.addColorStop(0, '#8a5bff'); ug.addColorStop(1, '#ff4fc1');
+          ctx.save(); ctx.shadowColor = 'rgba(255,60,200,0.35)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;
+          ctx.fillStyle = ug; ctx.beginPath(); ctx.roundRect(bx, by, bw, 46, [18, 18, 4, 18]); ctx.fill(); ctx.restore();
+          ctx.font = '400 15px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText("Summarize today's sales call", bx + 18, by + 28);
+          ctx.restore();
+          ctx.save(); ctx.globalAlpha = E(1.8, 2.1); ctx.font = '400 11px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.45)'; ctx.fillText('9:41', cx + cw - 52, by + 64); ctx.restore();
+        }
+      }
+      // AI reply: bubble grows from its tail corner, then types line by line
+      {
+        const bx = cx + 24, by = cy + 192, bw = 340, bh = 156;
+        const k = H.ease.back(ph(1.95, 2.35));
+        if (k > 0) {
+          ctx.save(); ctx.translate(bx, by + bh); ctx.scale(k, k); ctx.translate(-bx, -(by + bh)); ctx.globalAlpha = Math.min(1, ph(1.95, 2.1));
+          ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, [18, 18, 18, 4]); ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,0.22)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.roundRect(bx + 0.5, by + 0.5, bw - 1, bh - 1, [18, 18, 18, 4]); ctx.stroke();
+          ctx.restore();
+          ctx.font = '400 15px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText(typed('Here are the 3 key takeaways:', 2.25, 2.65), bx + 18, by + 32);
+          const items = [['Budget approved for Q3', '#4dffa6'], ['Pilot starts next Monday', '#7ad7ff'], ['Security review needed', '#ffb35c']];
+          items.forEach(([txt, c], i) => {
+            const a0 = 2.7 + i * 0.32;
+            const e = E(a0, a0 + 0.25); if (e <= 0) return;
+            const yy = by + 66 + i * 34;
+            ctx.save(); ctx.globalAlpha = e;
+            ctx.fillStyle = H.rgba(c, 0.18); ctx.beginPath(); ctx.roundRect(bx + 18, yy - 15, 22, 22, 7); ctx.fill();
+            ctx.font = '600 12px "Inter"'; ctx.fillStyle = c; ctx.textAlign = 'center'; ctx.fillText(String(i + 1), bx + 29, yy); ctx.textAlign = 'left';
+            ctx.restore();
+            ctx.font = '400 14px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fillText(typed(txt, a0 + 0.05, a0 + 0.3), bx + 52, yy);
+          });
+        }
+      }
+      // typing indicator: Nova is "thinking" before the reply, then again after it
+      {
+        const bx = cx + 24;
+        const before = t > 1.7 && t < 1.98, after = t > 3.75;
+        if (before || after) {
+          const by = before ? cy + 192 : cy + 364;
+          ctx.save(); ctx.globalAlpha = before ? 1 : E(3.75, 3.95);
+          ctx.fillStyle = 'rgba(255,255,255,0.10)'; ctx.beginPath(); ctx.roundRect(bx, by, 64, 30, 15); ctx.fill();
+          for (let i = 0; i < 3; i++) {
+            const a = 0.35 + 0.65 * Math.max(0, Math.sin(t * 9 - i * 0.9));
+            ctx.fillStyle = `rgba(255,255,255,${a})`; ctx.beginPath(); ctx.arc(bx + 20 + i * 12, by + 15, 3.2, 0, 7); ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+      // input field
+      {
+        const ix = cx + 20, iy = cy + ch - 74, iw = cw - 40, ih = 52;
+        ctx.save(); ctx.globalAlpha = E(1.15, 1.5);
+        ctx.fillStyle = 'rgba(10,6,40,0.22)'; ctx.beginPath(); ctx.roundRect(ix, iy, iw, ih, 26); ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.beginPath(); ctx.roundRect(ix + 0.5, iy + 0.5, iw - 1, ih - 1, 26); ctx.stroke();
+        ctx.font = '400 15px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fillText('Ask Nova anything…', ix + 22, iy + 31);
+        if (Math.sin(t * 6) > 0) { ctx.fillStyle = 'rgba(255,255,255,0.8)'; ctx.fillRect(ix + 21, iy + 17, 1.5, 19); }
+        const g = ctx.createLinearGradient(ix + iw - 46, iy, ix + iw - 6, iy + ih);
+        g.addColorStop(0, '#ff7a1a'); g.addColorStop(1, '#ff2bd6');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(ix + iw - 26, iy + 26, 19, 0, 7); ctx.fill();
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.beginPath(); ctx.moveTo(ix + iw - 26, iy + 34); ctx.lineTo(ix + iw - 26, iy + 18); ctx.moveTo(ix + iw - 33, iy + 25); ctx.lineTo(ix + iw - 26, iy + 18); ctx.lineTo(ix + iw - 19, iy + 25); ctx.stroke();
+        ctx.restore();
+      }
+
+      // ---------- stat chips: glass over glass (re-blur the composited frame), floating in ----------
+      SRC = blurOf(ctx.canvas, W, H_, 18);
+      const chip = (a0, dx, dy, fn) => {
+        const e = E(a0, a0 + 0.6); if (e <= 0) return;
+        ctx.save(); ctx.globalAlpha = Math.min(1, ph(a0, a0 + 0.3)); fn((1 - e) * dx, (1 - e) * dy); ctx.restore();
+      };
+      // chip 1: speed
+      chip(2.25, -40, 0, (ox, oy) => {
+        const x = 570 + ox, y = 180 + d(1, 4) + oy, w = 168, h = 64;
+        glass(ctx, SRC, x, y, w, h, 18, { shadow: 34, tint: 0.12 });
+        const g = ctx.createLinearGradient(x + 14, y + 14, x + 50, y + 50); g.addColorStop(0, '#ffcf5c'); g.addColorStop(1, '#ff7a1a');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.roundRect(x + 14, y + 14, 36, 36, 11); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(x + 34, y + 20); ctx.lineTo(x + 24, y + 34); ctx.lineTo(x + 31, y + 34); ctx.lineTo(x + 28, y + 44); ctx.lineTo(x + 39, y + 29); ctx.lineTo(x + 32, y + 29); ctx.closePath(); ctx.fill();
+        ctx.font = '800 22px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText((2.4 * E(2.3, 3.0)).toFixed(1) + '×', x + 62, y + 34);
+        ctx.font = '400 12px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.65)'; ctx.fillText('faster replies', x + 62, y + 51);
+      });
+      // chip 2: accuracy ring
+      chip(2.55, 40, 0, (ox, oy) => {
+        const x = 1018 + ox, y = 356 + d(2, 4) + oy, w = 196, h = 76;
+        glass(ctx, SRC, x, y, w, h, 20, { shadow: 34, tint: 0.12 });
+        const c = [x + 40, y + 38];
+        const rp = H.ease.inOut(ph(2.7, 3.6));
+        ctx.lineWidth = 6; ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.beginPath(); ctx.arc(c[0], c[1], 21, 0, 7); ctx.stroke();
+        const g = ctx.createLinearGradient(c[0] - 20, c[1] - 20, c[0] + 20, c[1] + 20); g.addColorStop(0, '#4dffa6'); g.addColorStop(1, '#00d1ff');
+        if (rp > 0) { ctx.strokeStyle = g; ctx.lineCap = 'round'; ctx.beginPath(); ctx.arc(c[0], c[1], 21, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * 0.986 * rp); ctx.stroke(); }
+        ctx.font = '800 22px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText((98.6 * rp).toFixed(1) + '%', x + 76, y + 40);
+        ctx.font = '400 12px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.65)'; ctx.fillText('answer accuracy', x + 76, y + 58);
+      });
+      // chip 3: sparkline
+      chip(2.85, 0, 40, (ox, oy) => {
+        const x = 556 + ox, y = 586 + d(3, 4) + oy, w = 190, h = 92;
+        glass(ctx, SRC, x, y, w, h, 20, { shadow: 34, tint: 0.12 });
+        ctx.font = '400 12px "Inter"'; ctx.fillStyle = 'rgba(255,255,255,0.65)'; ctx.fillText('Tokens / sec', x + 16, y + 26);
+        ctx.font = '800 22px "Inter"'; ctx.fillStyle = '#fff'; ctx.fillText('12.8k', x + 16, y + 52);
+        ctx.font = '600 12px "Inter"'; ctx.fillStyle = '#4dffa6'; ctx.fillText('▲ 18%', x + 82, y + 51);
+        const pts = []; const sr = H.rng(4);
+        for (let i = 0; i <= 12; i++) pts.push([x + 16 + i * 13.2, y + 80 - (i * 1.4 + sr() * 8 + Math.sin(i * 0.8 + t) * 2)]);
+        const sp = H.ease.inOut(ph(3.0, 3.7)), n = Math.max(1, Math.round(12 * sp));
+        const vis = pts.slice(0, n + 1);
+        if (sp > 0) {
+          const ag = ctx.createLinearGradient(0, y + 50, 0, y + 86); ag.addColorStop(0, 'rgba(77,255,166,0.35)'); ag.addColorStop(1, 'rgba(77,255,166,0)');
+          ctx.fillStyle = ag; ctx.beginPath(); ctx.moveTo(vis[0][0], y + 86); vis.forEach(p => ctx.lineTo(p[0], p[1])); ctx.lineTo(vis[vis.length - 1][0], y + 86); ctx.closePath(); ctx.fill();
+          ctx.strokeStyle = '#4dffa6'; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.beginPath(); vis.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.stroke();
+          const lp = vis[vis.length - 1]; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(lp[0], lp[1], 3.5, 0, 7); ctx.fill();
+        }
+      });
+    },
+  });
+}
+```
